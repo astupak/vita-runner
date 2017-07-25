@@ -1,0 +1,7 @@
+export const config = {
+  BG_CLOUD_SPEED: 0.2,
+  BUMPY_THRESHOLD: .3,
+  CLOUD_FREQUENCY: .5,
+  HORIZON_HEIGHT: 16,
+  MAX_CLOUDS: 6
+};
