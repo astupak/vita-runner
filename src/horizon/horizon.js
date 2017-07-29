@@ -1,21 +1,23 @@
-import { config } from './horizon-config';
+import { 
+  horizonConfig,
+  DIMENSIONS,
+} from 'Configs';
+import HorizonLine from './horizonLine';
+import NightMode from '../nightMode';
 import Cloud from '../cloud';
-import {
-  getRandomNum
-} from '../service';
+import Obstacle from '../obstacle';
+import { getRandomNum } from '../service';
 
 class Horizon {
-  constructor(canvas, spritePos, dimensions, gapCoefficient) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.canvasCtx = this.canvas.getContext('2d');
     this.config = Horizon.config;
-    this.dimensions = dimensions;
-    this.gapCoefficient = gapCoefficient;
     this.obstacles = [];
     this.obstacleHistory = [];
+    this.dimensions = DIMENSIONS;
     this.horizonOffsets = [0, 0];
     this.cloudFrequency = this.config.CLOUD_FREQUENCY;
-    this.spritePos = spritePos;
     this.nightMode = null;
 
     // Cloud
@@ -29,9 +31,8 @@ class Horizon {
 
   init() {
     this.addCloud();
-    this.horizonLine = new HorizonLine(this.canvas, this.spritePos.HORIZON);
-    this.nightMode = new NightMode(this.canvas, this.spritePos.MOON,
-      this.dimensions.WIDTH);
+    this.horizonLine = new HorizonLine(this.canvas);
+    this.nightMode = new NightMode(this.canvas);
   }
 
   /**
@@ -139,16 +140,13 @@ class Horizon {
       currentSpeed < obstacleType.minSpeed) {
       this.addNewObstacle(currentSpeed);
     } else {
-      var obstacleSpritePos = this.spritePos[obstacleType.type];
-
       this.obstacles.push(new Obstacle(this.canvasCtx, obstacleType,
-        obstacleSpritePos, this.dimensions,
-        this.gapCoefficient, currentSpeed, obstacleType.width));
+        currentSpeed));
 
       this.obstacleHistory.unshift(obstacleType.type);
 
       if (this.obstacleHistory.length > 1) {
-        this.obstacleHistory.splice(Runner.config.MAX_OBSTACLE_DUPLICATION);
+        this.obstacleHistory.splice(Horizon.config.MAX_OBSTACLE_DUPLICATION);
       }
     }
   }
@@ -165,7 +163,7 @@ class Horizon {
       duplicateCount = this.obstacleHistory[i] == nextObstacleType ?
         duplicateCount + 1 : 0;
     }
-    return duplicateCount >= Runner.config.MAX_OBSTACLE_DUPLICATION;
+    return duplicateCount >= Horizon.config.MAX_OBSTACLE_DUPLICATION;
   }
 
   /**
@@ -192,12 +190,11 @@ class Horizon {
    * Add a new cloud to the horizon.
    */
   addCloud() {
-    this.clouds.push(new Cloud(this.canvas, this.spritePos.CLOUD,
-      this.dimensions.WIDTH));
+    this.clouds.push(new Cloud(this.canvas));
   }
 
 }
 
-Horizon.config = config;
+Horizon = Object.assign(Horizon, horizonConfig);
 
 export default Horizon;

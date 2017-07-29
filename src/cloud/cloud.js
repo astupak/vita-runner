@@ -1,20 +1,33 @@
-import { config } from './cloud-config';
+import {
+  cloudConfig,
+  IS_HIDPI,
+  DIMENSIONS,
+} from 'Configs';
 import { getRandomNum } from '../service';
-import { IS_HIDPI } from '../consts';
 
 class Cloud {
-  constructor(canvas, spritePos, containerWidth) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.canvasCtx = this.canvas.getContext('2d');
-    this.spritePos = spritePos;
-    this.containerWidth = containerWidth;
-    this.xPos = containerWidth;
+    this.spritePos = {x:0, y:0};
+    this.containerWidth = DIMENSIONS.WIDTH;
+    this.xPos = DIMENSIONS.WIDTH;
     this.yPos = 0;
     this.remove = false;
     this.cloudGap = getRandomNum(Cloud.config.MIN_CLOUD_GAP,
       Cloud.config.MAX_CLOUD_GAP);
 
+    this.setSprite();
     this.init();
+  }
+
+  setSprite() {
+    if (IS_HIDPI) {
+      this.sprite = document.getElementById(Cloud.spriteIds.HDPI.CLOUD);
+      console.log(this.sprite);
+    } else {
+      this.sprite = document.getElementById(Cloud.spriteIds.LDPI.CLOUD)
+    }
   }
   init() {
     this.yPos = getRandomNum(Cloud.config.MAX_SKY_LEVEL,
@@ -35,7 +48,7 @@ class Cloud {
       sourceHeight = sourceHeight * 2;
     }
 
-    this.canvasCtx.drawImage(Runner.imageSprite, this.spritePos.x,
+    this.canvasCtx.drawImage(this.sprite, this.spritePos.x,
       this.spritePos.y,
       sourceWidth, sourceHeight,
       this.xPos, this.yPos,
@@ -70,6 +83,6 @@ class Cloud {
 
 }
 
-Cloud.config = config;
+Cloud = Object.assign(Cloud, cloudConfig);
 
 export default Cloud;

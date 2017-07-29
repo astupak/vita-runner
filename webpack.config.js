@@ -6,8 +6,14 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist'
+  },
+  resolve: {
+    alias: {
+      Configs: path.resolve(__dirname, 'src/config')
+    }
   },
   module: {
     rules: [
@@ -17,7 +23,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['env'],
+            plugins: [require('babel-plugin-transform-object-rest-spread')]
           }
         }
       }

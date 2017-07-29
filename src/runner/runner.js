@@ -1,20 +1,27 @@
-import * as runnerConfig from './runner-config';
 import {
-  createCanvas
-} from '../service';
-import Horizon from '../horizon';
-import {
+  runnerConfig,
   DEFAULT_WIDTH,
   FPS,
   IS_HIDPI,
   IS_IOS,
   IS_MOBILE,
   IS_TOUCH_ENABLED,
-} from '../consts';
-
+  DIMENSIONS,
+} from 'Configs';
+import { 
+  createCanvas,
+  getTimeStamp,
+  decodeBase64ToArrayBuffer
+} from '../service';
+import Horizon from '../horizon';
+import Trex from '../trex';
+import DistanceMeter from '../distanceMeter';
+import { checkForCollision } from '../collision';
+import ImagesLoader from './imagesLoader';
 
 class Runner {
   constructor(outerContainerId, opt_config) {
+    console.log('construct');
     this.outerContainerEl = document.querySelector(outerContainerId);
     this.containerEl = null;
     this.snackbarEl = null;
@@ -22,7 +29,7 @@ class Runner {
 
     this.config = opt_config || Runner.config;
 
-    this.dimensions = Runner.defaultDimensions;
+    this.dimensions = DIMENSIONS;
 
     this.canvas = null;
     this.canvasCtx = null;
@@ -122,20 +129,24 @@ class Runner {
    * definition.
    */
   loadImages() {
+    let imagesLoader, spriteIds;    
+
     if (IS_HIDPI) {
-      Runner.imageSprite = document.getElementById('offline-resources-2x');
+      spriteIds = Runner.spriteIds['HDPI'];
       this.spriteDef = Runner.spriteDefinition.HDPI;
+
     } else {
-      Runner.imageSprite = document.getElementById('offline-resources-1x');
+      spriteIds = Runner.spriteIds['LDPI'];
       this.spriteDef = Runner.spriteDefinition.LDPI;
+
     }
 
-    if (Runner.imageSprite.complete) {
+    imagesLoader = new ImagesLoader(spriteIds);
+
+    if (imagesLoader.checkAll()) {
       this.init();
     } else {
-      // If the images are not yet loaded, add a listener.
-      Runner.imageSprite.addEventListener(Runner.events.LOAD,
-        this.init.bind(this));
+      imagesLoader.onLoaded(this.init.bind(this));
     }
   }
 
@@ -184,6 +195,8 @@ class Runner {
    * Game initialiser.
    */
   init() {
+        console.log('init');
+
     // Hide the static icon.
     document.querySelector('.' + Runner.classes.ICON).style.visibility =
       'hidden';
@@ -195,6 +208,7 @@ class Runner {
     this.containerEl.className = Runner.classes.CONTAINER;
 
     // Player canvas container.
+    console.log(this.dimensions);
     this.canvas = createCanvas(this.containerEl, this.dimensions.WIDTH,
       this.dimensions.HEIGHT, Runner.classes.PLAYER);
 
@@ -204,15 +218,16 @@ class Runner {
     Runner.updateCanvasScaling(this.canvas);
 
     // Horizon contains clouds, obstacles and the ground.
-    this.horizon = new Horizon(this.canvas, this.spriteDef, this.dimensions,
+    console.log(this.spriteDef, this.dimensions,
       this.config.GAP_COEFFICIENT);
+    this.horizon = new Horizon(this.canvas);
 
     // Distance meter
     this.distanceMeter = new DistanceMeter(this.canvas,
       this.spriteDef.TEXT_SPRITE, this.dimensions.WIDTH);
 
     // Draw t-rex
-    this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
+    this.tRex = new Trex(this.canvas);
 
     this.outerContainerEl.appendChild(this.containerEl);
 
@@ -458,6 +473,7 @@ class Runner {
    */
   startListening() {
     // Keys.
+    console.log(this);
     document.addEventListener(Runner.events.KEYDOWN, this);
     document.addEventListener(Runner.events.KEYUP, this);
 

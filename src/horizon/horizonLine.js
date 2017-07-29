@@ -1,22 +1,25 @@
 import {
-  dimensions
-} from './horizonLine-config';
+  FPS,
+  IS_HIDPI,
+  horizonLineConfig
+} from 'Configs';
 
 class HorizonLine {
-  constructor(canvas, spritePos) {
-    this.spritePos = spritePos;
+  constructor(canvas) {
+    this.spritePos = {x: 0, y: 0};
+    this.sprite = null;
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
     this.sourceDimensions = {};
     this.dimensions = HorizonLine.dimensions;
     this.sourceXPos = [this.spritePos.x, this.spritePos.x +
-      this.dimensions.WIDTH
-    ];
+        this.dimensions.WIDTH];
     this.xPos = [];
     this.yPos = 0;
     this.bumpThreshold = 0.5;
 
     this.setSourceDimensions();
+    this.setSprite();
     this.draw();
   }
 
@@ -30,6 +33,7 @@ class HorizonLine {
         if (dimension != 'YPOS') {
           this.sourceDimensions[dimension] =
             HorizonLine.dimensions[dimension] * 2;
+            console.log(this.sourceDimensions);
         }
       } else {
         this.sourceDimensions[dimension] =
@@ -40,6 +44,14 @@ class HorizonLine {
 
     this.xPos = [0, HorizonLine.dimensions.WIDTH];
     this.yPos = HorizonLine.dimensions.YPOS;
+  }
+
+  setSprite() {
+    if (IS_HIDPI) {
+      this.sprite = document.getElementById(HorizonLine.spriteIds.HDPI.HORIZON);
+    } else {
+      this.sprite = document.getElementById(HorizonLine.spriteIds.LDPI.HORIZON)
+    }
   }
 
   /**
@@ -53,17 +65,19 @@ class HorizonLine {
    * Draw the horizon line.
    */
   draw() {
-    this.canvasCtx.drawImage(Runner.imageSprite, this.sourceXPos[0],
+    console.log(this.xPos[0],this.xPos[1])
+    this.canvasCtx.drawImage(this.sprite, this.sourceXPos[0],
       this.spritePos.y,
       this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
       this.xPos[0], this.yPos,
       this.dimensions.WIDTH, this.dimensions.HEIGHT);
 
-    this.canvasCtx.drawImage(Runner.imageSprite, this.sourceXPos[1],
+    this.canvasCtx.drawImage(this.sprite, this.sourceXPos[1],
       this.spritePos.y,
       this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
       this.xPos[1], this.yPos,
       this.dimensions.WIDTH, this.dimensions.HEIGHT);
+    console.log(this.xPos[0],this.xPos[1])
   }
 
   /**
@@ -74,15 +88,16 @@ class HorizonLine {
   updateXPos(pos, increment) {
     var line1 = pos;
     var line2 = pos == 0 ? 1 : 0;
-
+    console.log(line1, line2);
     this.xPos[line1] -= increment;
     this.xPos[line2] = this.xPos[line1] + this.dimensions.WIDTH;
 
     if (this.xPos[line1] <= -this.dimensions.WIDTH) {
-      this.xPos[line1] += this.dimensions.WIDTH * 2;
+      this.xPos[line1] += this.dimensions.WIDTH *2 ;
       this.xPos[line2] = this.xPos[line1] - this.dimensions.WIDTH;
       this.sourceXPos[line1] = this.getRandomType() + this.spritePos.x;
     }
+
   }
 
   /**
@@ -110,6 +125,6 @@ class HorizonLine {
   }
 }
 
-HorizonLine.dimensions = dimensions;
+HorizonLine = Object.assign(HorizonLine, horizonLineConfig);
 
 export default HorizonLine;
