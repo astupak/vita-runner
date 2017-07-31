@@ -45,26 +45,26 @@ export const status = {
 export const BLINK_TIMING = 7000;
 
 export const animFrames = {
-  WAITING: {
-    frames: [375, 0],
-    msPerFrame: 1000 / 3
-  },
-  RUNNING: {
-    frames: [750, 1125],
-    msPerFrame: 1500 / 12
-  },
-  CRASHED: {
-    frames: [220],
-    msPerFrame: 1000 / 60
-  },
-  JUMPING: {
-    frames: [0],
-    msPerFrame: 1000 / 60
-  },
-  DUCKING: {
-    frames: [2250, 2612],
-    msPerFrame: 1000 / 8
-  }
+    WAITING: {
+        frames: [44, 0],
+        msPerFrame: 1000 / 3
+    },
+    RUNNING: {
+        frames: [88, 132],
+        msPerFrame: 1000 / 12
+    },
+    CRASHED: {
+        frames: [220],
+        msPerFrame: 1000 / 60
+    },
+    JUMPING: {
+        frames: [0],
+        msPerFrame: 1000 / 60
+    },
+    DUCKING: {
+        frames: [262, 321],
+        msPerFrame: 1000 / 8
+    }
 };
 
 export const spriteIds = {

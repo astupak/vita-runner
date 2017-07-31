@@ -88,6 +88,7 @@ class Obstacle {
    * Draw and crop based on size.
    */
   draw() {
+    console.log(123);
     var sourceWidth = this.typeConfig.width;
     var sourceHeight = this.typeConfig.height;
 

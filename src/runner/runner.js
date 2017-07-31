@@ -11,11 +11,13 @@ import {
 import { 
   createCanvas,
   getTimeStamp,
-  decodeBase64ToArrayBuffer
+  decodeBase64ToArrayBuffer,
+  vibrate,
 } from '../service';
 import Horizon from '../horizon';
 import Trex from '../trex';
 import DistanceMeter from '../distanceMeter';
+import GameOverPanel from '../gameOverPanel';
 import { checkForCollision } from '../collision';
 import ImagesLoader from './imagesLoader';
 

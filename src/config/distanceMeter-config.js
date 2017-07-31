@@ -33,3 +33,12 @@ export const config = {
   // Flash iterations for achievement animation.
   FLASH_ITERATIONS: 3
 };
+
+export const spriteIds = {
+  LDPI: {
+      TEXT_SPRITE: 'text-1x',
+  },
+  HDPI: {
+      TEXT_SPRITE: 'text-2x',
+  }
+};

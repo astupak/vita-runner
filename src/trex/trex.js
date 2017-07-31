@@ -22,7 +22,7 @@ class Trex {
     this.blinkCount = 0;
     this.animStartTime = 0;
     this.timer = 0;
-    this.msPerFrame = 10000 / FPS;
+    this.msPerFrame = 2000 / FPS;
     this.config = Trex.config;
     // Current status.
     this.status = Trex.status.WAITING;
@@ -121,20 +121,17 @@ class Trex {
   draw(x, y) {
     var sourceX = x;
     var sourceY = y;
-    // var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ?
-    //   this.config.WIDTH_DUCK : this.config.WIDTH;
-    // var sourceHeight = this.config.HEIGHT;
-
     var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ?
-      this.config.SOURCE_WIDTH_DUCK : this.config.SOURCE_WIDTH;
-    var sourceHeight = this.config.SOURCE_HEIGHT;
-    console.log(IS_HIDPI);
-    // if (IS_HIDPI) {
-    //   sourceX *= 2;
-    //   sourceY *= 2;
-    //   sourceWidth *= 2;
-    //   sourceHeight *= 2;
-    // }
+      this.config.WIDTH_DUCK : this.config.WIDTH;
+    var sourceHeight = this.config.HEIGHT;
+
+  
+    if (IS_HIDPI) {
+      sourceX *= 2;
+      sourceY *= 2;
+      sourceWidth *= 2;
+      sourceHeight *= 2;
+    }
 
     // Adjustments for sprite sheet position.
     sourceX += this.spritePos.x;

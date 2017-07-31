@@ -1,11 +1,15 @@
-import { distanceMeterConfig } from 'Configs';
+import { 
+  distanceMeterConfig,
+  DIMENSIONS,
+  IS_HIDPI,
+} from 'Configs';
 
 class DistanceMeter {
-  constructor(canvas, spritePos, canvasWidth) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
     // this.image = Runner.imageSprite;
-    this.spritePos = spritePos;
+    this.spritePos = {x:0, y:0};
     this.x = 0;
     this.y = 5;
 
@@ -23,8 +27,21 @@ class DistanceMeter {
 
     this.config = DistanceMeter.config;
     this.maxScoreUnits = this.config.MAX_DISTANCE_UNITS;
-    this.init(canvasWidth);
+    
+    this.setSprite();
+
+    this.init(DIMENSIONS.WIDTH);
   }
+
+  setSprite() {
+    if (IS_HIDPI) {
+      this.sprite = document.getElementById(DistanceMeter.spriteIds.HDPI.TEXT_SPRITE);
+    } else {
+      this.sprite = document.getElementById(DistanceMeter.spriteIds.LDPI.TEXT_SPRITE)
+    }
+  }
+
+
   init(width) {
     var maxDistanceStr = '';
 
@@ -55,44 +72,44 @@ class DistanceMeter {
    * @param {boolean} opt_highScore Whether drawing the high score.
    */
   draw(digitPos, value, opt_highScore) {
-    // var sourceWidth = DistanceMeter.dimensions.WIDTH;
-    // var sourceHeight = DistanceMeter.dimensions.HEIGHT;
-    // var sourceX = DistanceMeter.dimensions.WIDTH * value;
-    // var sourceY = 0;
+    var sourceWidth = DistanceMeter.dimensions.WIDTH;
+    var sourceHeight = DistanceMeter.dimensions.HEIGHT;
+    var sourceX = DistanceMeter.dimensions.WIDTH * value;
+    var sourceY = 0;
 
-    // var targetX = digitPos * DistanceMeter.dimensions.DEST_WIDTH;
-    // var targetY = this.y;
-    // var targetWidth = DistanceMeter.dimensions.WIDTH;
-    // var targetHeight = DistanceMeter.dimensions.HEIGHT;
+    var targetX = digitPos * DistanceMeter.dimensions.DEST_WIDTH;
+    var targetY = this.y;
+    var targetWidth = DistanceMeter.dimensions.WIDTH;
+    var targetHeight = DistanceMeter.dimensions.HEIGHT;
 
-    // // For high DPI we 2x source values.
-    // if (IS_HIDPI) {
-    //   sourceWidth *= 2;
-    //   sourceHeight *= 2;
-    //   sourceX *= 2;
-    // }
+    // For high DPI we 2x source values.
+    if (IS_HIDPI) {
+      sourceWidth *= 2;
+      sourceHeight *= 2;
+      sourceX *= 2;
+    }
 
-    // sourceX += this.spritePos.x;
-    // sourceY += this.spritePos.y;
+    sourceX += this.spritePos.x;
+    sourceY += this.spritePos.y;
 
-    // this.canvasCtx.save();
+    this.canvasCtx.save();
 
-    // if (opt_highScore) {
-    //   // Left of the current score.
-    //   var highScoreX = this.x - (this.maxScoreUnits * 2) *
-    //     DistanceMeter.dimensions.WIDTH;
-    //   this.canvasCtx.translate(highScoreX, this.y);
-    // } else {
-    //   this.canvasCtx.translate(this.x, this.y);
-    // }
+    if (opt_highScore) {
+      // Left of the current score.
+      var highScoreX = this.x - (this.maxScoreUnits * 2) *
+        DistanceMeter.dimensions.WIDTH;
+      this.canvasCtx.translate(highScoreX, this.y);
+    } else {
+      this.canvasCtx.translate(this.x, this.y);
+    }
 
-    // this.canvasCtx.drawImage(this.image, sourceX, sourceY,
-    //   sourceWidth, sourceHeight,
-    //   targetX, targetY,
-    //   targetWidth, targetHeight
-    // );
+    this.canvasCtx.drawImage(this.sprite, sourceX, sourceY,
+      sourceWidth, sourceHeight,
+      targetX, targetY,
+      targetWidth, targetHeight
+    );
 
-    // this.canvasCtx.restore();
+    this.canvasCtx.restore();
   }
 
   /**
@@ -175,12 +192,12 @@ class DistanceMeter {
    * Draw the high score.
    */
   drawHighScore() {
-    // this.canvasCtx.save();
-    // this.canvasCtx.globalAlpha = .8;
-    // for (var i = this.highScore.length - 1; i >= 0; i--) {
-    //   this.draw(i, parseInt(this.highScore[i], 10), true);
-    // }
-    // this.canvasCtx.restore();
+    this.canvasCtx.save();
+    this.canvasCtx.globalAlpha = .8;
+    for (var i = this.highScore.length - 1; i >= 0; i--) {
+      this.draw(i, parseInt(this.highScore[i], 10), true);
+    }
+    this.canvasCtx.restore();
   }
 
   /**

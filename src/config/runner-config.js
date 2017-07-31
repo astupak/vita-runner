@@ -90,7 +90,10 @@ export const spriteIds = {
       CACTUS_SMALL: 'cactusSmall-1x',
       CACTUS_LARGE: 'cactusLarge-1x',
       PTERODACTYL: 'pterodactyl-1x',
-      TREX: 'trex-1x'
+      TREX: 'trex-1x',
+      TEXT_SPRITE: 'text-1x',
+      GAME_OVER: 'gameOver-1x',
+      RESTART: 'restart-1x'
   },
   HDPI: {
       HORIZON: 'horizonLine-2x',
@@ -100,7 +103,10 @@ export const spriteIds = {
       CACTUS_SMALL: 'cactusSmall-2x',
       CACTUS_LARGE: 'cactusLarge-2x',
       PTERODACTYL: 'pterodactyl-2x',
-      TREX: 'trex-2x'
+      TREX: 'trex-2x',
+      TEXT_SPRITE: 'text-2x',
+      GAME_OVER: 'gameOver-2x',
+      RESTART: 'restart-2x'
   }
 };
 
