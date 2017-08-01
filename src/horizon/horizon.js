@@ -16,7 +16,6 @@ class Horizon {
     this.obstacles = [];
     this.obstacleHistory = [];
     this.dimensions = DIMENSIONS;
-    this.horizonOffsets = [0, 0];
     this.cloudFrequency = this.config.CLOUD_FREQUENCY;
     this.nightMode = null;
 
@@ -192,8 +191,7 @@ class Horizon {
   addCloud() {
     this.clouds.push(new Cloud(this.canvas));
   }
-
-}
+};
 
 Horizon = Object.assign(Horizon, horizonConfig);
 

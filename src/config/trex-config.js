@@ -1,23 +1,26 @@
 import {CollisionBox} from '../collision';
 
 export const config = {
-  SOURCE_WIDTH: 375,
-  SOURCE_HEIGHT: 707,
-  SOURCE_WIDTH_DUCK: 362,
-  SOURCE_HEIGHT_DUCK: 507,  
-  DROP_VELOCITY: -5,
+  BOTTOM_PAD: 10,
+  DROP_VELOCITY: -8,
   GRAVITY: 0.6,
-  HEIGHT: 47,
-  HEIGHT_DUCK: 25,
-  INIITAL_JUMP_VELOCITY: -10,
-  INTRO_DURATION: 1500,
-  MAX_JUMP_HEIGHT: 30,
-  MIN_JUMP_HEIGHT: 30,
+  HEIGHT: 95,
+  HEIGHT_DUCK: 70,
+  INIITAL_JUMP_VELOCITY: -13,
+  INTRO_DURATION: 1200,
+  MAX_JUMP_HEIGHT: 60,
+  MIN_JUMP_HEIGHT: 60,
   SPEED_DROP_COEFFICIENT: 3,
-  SPRITE_WIDTH: 262,
   START_X_POS: 50,
-  WIDTH: 44,
-  WIDTH_DUCK: 59
+  WIDTH: 60,
+  WIDTH_DUCK: 60
+};
+
+export const sourceDimensions = {
+  WIDTH: 188,
+  HEIGHT: 354,
+  WIDTH_DUCK: 181,
+  HEIGHT_DUCK: 254,  
 };
 
 export const collisionBoxes = {
@@ -46,24 +49,24 @@ export const BLINK_TIMING = 7000;
 
 export const animFrames = {
     WAITING: {
-        frames: [44, 0],
-        msPerFrame: 1000 / 3
+        frames: [188, 0],
+        msPerFrame: 1500 / 3
     },
     RUNNING: {
-        frames: [88, 132],
-        msPerFrame: 1000 / 12
+        frames: [376, 564],
+        msPerFrame: 1500 / 12
     },
     CRASHED: {
-        frames: [220],
-        msPerFrame: 1000 / 60
+        frames: [940],
+        msPerFrame: 1500 / 60
     },
     JUMPING: {
         frames: [0],
-        msPerFrame: 1000 / 60
+        msPerFrame: 1500 / 60
     },
     DUCKING: {
-        frames: [262, 321],
-        msPerFrame: 1000 / 8
+        frames: [1125, 1306],
+        msPerFrame: 1500 / 8
     }
 };
 

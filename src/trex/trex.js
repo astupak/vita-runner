@@ -1,6 +1,5 @@
 import { 
   trexConfig,
-  runnerConfig,
   DIMENSIONS,
   FPS,
   IS_HIDPI
@@ -24,6 +23,7 @@ class Trex {
     this.timer = 0;
     this.msPerFrame = 2000 / FPS;
     this.config = Trex.config;
+    this.sourceDimensions = Trex.sourceDimensions;
     // Current status.
     this.status = Trex.status.WAITING;
 
@@ -49,7 +49,7 @@ class Trex {
 
   init() {
     this.groundYPos = DIMENSIONS.HEIGHT - this.config.HEIGHT -
-      runnerConfig.config.BOTTOM_PAD;
+      this.config.BOTTOM_PAD;
     this.yPos = this.groundYPos;
     this.minJumpHeight = this.groundYPos - this.config.MIN_JUMP_HEIGHT;
 
@@ -119,13 +119,13 @@ class Trex {
    * @param {number} y
    */
   draw(x, y) {
-    var sourceX = x;
-    var sourceY = y;
-    var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ?
-      this.config.WIDTH_DUCK : this.config.WIDTH;
-    var sourceHeight = this.config.HEIGHT;
+    let sourceX = x;
+    let sourceY = y;
 
-  
+    let sourceWidth = this.ducking && this.status != Trex.status.CRASHED ?
+      this.sourceDimensions.WIDTH_DUCK : this.sourceDimensions.WIDTH;
+    let sourceHeight = this.sourceDimensions.HEIGHT;
+
     if (IS_HIDPI) {
       sourceX *= 2;
       sourceY *= 2;
@@ -168,7 +168,7 @@ class Trex {
    * @param {number} time Current time in milliseconds.
    */
   blink(time) {
-    var deltaTime = time - this.animStartTime;
+    let deltaTime = time - this.animStartTime;
 
     if (deltaTime >= this.blinkDelay) {
       this.draw(this.currentAnimFrames[this.currentFrame], 0);
@@ -213,8 +213,8 @@ class Trex {
    * @param {number} speed
    */
   updateJump(deltaTime, speed) {
-    var msPerFrame = Trex.animFrames[this.status].msPerFrame;
-    var framesElapsed = deltaTime / msPerFrame;
+    let msPerFrame = Trex.animFrames[this.status].msPerFrame;
+    let framesElapsed = deltaTime / msPerFrame;
 
     // Speed drop makes Trex fall faster.
     if (this.speedDrop) {

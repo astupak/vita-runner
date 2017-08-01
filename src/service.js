@@ -8,7 +8,7 @@ const { classes } = runnerConfig;
 
 export function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 /**
  * Vibrate on mobile devices.
@@ -18,7 +18,7 @@ export function vibrate(duration) {
   if (IS_MOBILE && window.navigator.vibrate) {
     window.navigator.vibrate(duration);
   }
-}
+};
 
 /**
  * Create canvas element.
@@ -37,7 +37,7 @@ export function createCanvas(container, width, height, opt_classname) {
   container.appendChild(canvas);
 
   return canvas;
-}
+};
 
 /**
  * Decodes the base 64 audio to ArrayBuffer used by Web Audio.
@@ -53,7 +53,7 @@ export function decodeBase64ToArrayBuffer(base64String) {
     bytes[i] = str.charCodeAt(i);
   }
   return bytes.buffer;
-}
+};
 
 /**
  * Return the current timestamp.
@@ -61,4 +61,4 @@ export function decodeBase64ToArrayBuffer(base64String) {
  */
 export function getTimeStamp() {
   return IS_IOS ? new Date().getTime() : performance.now();
-}
+};

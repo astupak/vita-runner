@@ -2,15 +2,21 @@ import { CollisionBox } from '../collision';
 
 export const MAX_GAP_COEFFICIENT = 1.5;
 
+export const GAP_COEFFICIENT = 0.6;
+
 export const MAX_OBSTACLE_LENGTH = 3;
 
 export const types = [{
   type: 'CACTUS_SMALL',
-  width: 17,
-  height: 35,
-  yPos: 105,
+  width: 28,
+  height: 59,
+  sourceDimensions: {
+    width: 17,
+    height: 35,
+  },
+  yPos: 152,
   multipleSpeed: 4,
-  minGap: 120,
+  minGap: 240,
   minSpeed: 0,
   collisionBoxes: [
     new CollisionBox(0, 7, 5, 27),
@@ -19,11 +25,15 @@ export const types = [{
   ]
 }, {
   type: 'CACTUS_LARGE',
-  width: 25,
-  height: 50,
-  yPos: 90,
+  width: 38,
+  height: 75,
+  sourceDimensions: {
+    width: 25,
+    height: 50,
+  },
+  yPos: 135,
   multipleSpeed: 7,
-  minGap: 120,
+  minGap: 240,
   minSpeed: 0,
   collisionBoxes: [
     new CollisionBox(0, 12, 7, 38),
@@ -32,13 +42,17 @@ export const types = [{
   ]
 }, {
   type: 'PTERODACTYL',
-  width: 46,
-  height: 40,
-  yPos: [100, 75, 50], // Variable height.
+  width: 69,
+  height: 60,
+  sourceDimensions: {
+    width: 46,
+    height: 40,
+  },
+  yPos: [150, 90, 65], // Variable height.
   yPosMobile: [100, 50], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
-  minGap: 150,
+  minGap: 300,
   collisionBoxes: [
     new CollisionBox(15, 15, 16, 5),
     new CollisionBox(18, 21, 24, 6),
@@ -47,7 +61,7 @@ export const types = [{
     new CollisionBox(10, 8, 6, 9)
   ],
   numFrames: 2,
-  frameRate: 1000 / 6,
+  frameRate: 2000 / 6,
   speedOffset: .8
 }];
 

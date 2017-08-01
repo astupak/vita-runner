@@ -1,8 +1,14 @@
 export const dimensions = {
+  WIDTH: 900,
+  HEIGHT: 18,
+  YPOS: 195
+};
+
+export const sourceDimensions = {
   WIDTH: 600,
   HEIGHT: 12,
-  YPOS: 127
 };
+
 
 export const spriteIds = {
   LDPI: {
@@ -12,3 +18,5 @@ export const spriteIds = {
       HORIZON: 'horizonLine-2x',
   }
 };
+
+export const BUMP_THRESHOLD = .5;

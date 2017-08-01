@@ -1,6 +1,5 @@
 import {
   trexConfig,
-  runnerConfig,
   DIMENSIONS,
 } from 'Configs';
 
@@ -11,7 +10,7 @@ export class CollisionBox {
     this.width = w;
     this.height = h;
   }
-}
+};
 
 /**
  * Check for a collision.
@@ -22,17 +21,17 @@ export class CollisionBox {
  * @return {Array<CollisionBox>}
  */
 export function checkForCollision(obstacle, tRex, opt_canvasCtx) {
-  var obstacleBoxXPos = DIMENSIONS.WIDTH + obstacle.xPos;
+  let obstacleBoxXPos = DIMENSIONS.WIDTH + obstacle.xPos;
 
   // Adjustments are made to the bounding box as there is a 1 pixel white
   // border around the t-rex and obstacles.
-  var tRexBox = new CollisionBox(
+  let tRexBox = new CollisionBox(
     tRex.xPos + 1,
     tRex.yPos + 1,
     tRex.config.WIDTH - 2,
     tRex.config.HEIGHT - 2);
 
-  var obstacleBox = new CollisionBox(
+  let obstacleBox = new CollisionBox(
     obstacle.xPos + 1,
     obstacle.yPos + 1,
     obstacle.typeConfig.width * obstacle.size - 2,
@@ -45,19 +44,19 @@ export function checkForCollision(obstacle, tRex, opt_canvasCtx) {
 
   // Simple outer bounds check.
   if (boxCompare(tRexBox, obstacleBox)) {
-    var collisionBoxes = obstacle.collisionBoxes;
-    var tRexCollisionBoxes = tRex.ducking ?
+    let collisionBoxes = obstacle.collisionBoxes;
+    let tRexCollisionBoxes = tRex.ducking ?
       trexConfig.collisionBoxes.DUCKING : trexConfig.collisionBoxes.RUNNING;
 
     // Detailed axis aligned box check.
-    for (var t = 0; t < tRexCollisionBoxes.length; t++) {
-      for (var i = 0; i < collisionBoxes.length; i++) {
+    for (let t = 0; t < tRexCollisionBoxes.length; t++) {
+      for (let i = 0; i < collisionBoxes.length; i++) {
         // Adjust the box to actual positions.
-        var adjTrexBox =
+        let adjTrexBox =
           createAdjustedCollisionBox(tRexCollisionBoxes[t], tRexBox);
-        var adjObstacleBox =
+        let adjObstacleBox =
           createAdjustedCollisionBox(collisionBoxes[i], obstacleBox);
-        var crashed = boxCompare(adjTrexBox, adjObstacleBox);
+        let crashed = boxCompare(adjTrexBox, adjObstacleBox);
 
         // Draw boxes for debug.
         if (opt_canvasCtx) {
@@ -111,12 +110,12 @@ export function drawCollisionBoxes(canvasCtx, tRexBox, obstacleBox) {
  * @return {boolean} Whether the boxes intersected.
  */
 export function boxCompare(tRexBox, obstacleBox) {
-  var crashed = false;
-  var tRexBoxX = tRexBox.x;
-  var tRexBoxY = tRexBox.y;
+  let crashed = false;
+  let tRexBoxX = tRexBox.x;
+  let tRexBoxY = tRexBox.y;
 
-  var obstacleBoxX = obstacleBox.x;
-  var obstacleBoxY = obstacleBox.y;
+  let obstacleBoxX = obstacleBox.x;
+  let obstacleBoxY = obstacleBox.y;
 
   // Axis-Aligned Bounding Box method.
   if (tRexBox.x < obstacleBoxX + obstacleBox.width &&

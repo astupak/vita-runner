@@ -18,6 +18,7 @@ class NightMode {
     this.containerWidth = DIMENSIONS.WIDTH;
     this.stars = [];
     this.drawStars = false;
+
     this.setSprite();
     this.placeStars();
   }
@@ -55,7 +56,7 @@ class NightMode {
 
       // Update stars.
       if (this.drawStars) {
-        for (var i = 0; i < NightMode.config.NUM_STARS; i++) {
+        for (let i = 0; i < NightMode.config.NUM_STARS; i++) {
           this.stars[i].x = this.updateXPos(this.stars[i].x,
             NightMode.config.STAR_SPEED);
         }
@@ -78,13 +79,13 @@ class NightMode {
   }
 
   draw() {
-    var moonSourceWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 :
+    let moonSourceWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 :
         NightMode.config.WIDTH;
-    var moonSourceHeight = NightMode.config.HEIGHT;
-    var moonSourceX = this.moonSpritePos.x + NightMode.phases[this.currentPhase];
-    var moonOutputWidth = moonSourceWidth;
-    var starSize = NightMode.config.STAR_SIZE;
-    var starSourceX = this.starSpritePos.x;
+    let moonSourceHeight = NightMode.config.HEIGHT;
+    let moonSourceX = this.moonSpritePos.x + NightMode.phases[this.currentPhase];
+    let moonOutputWidth = moonSourceWidth;
+    let starSize = NightMode.config.STAR_SIZE;
+    let starSourceX = this.starSpritePos.x;
 
     if (IS_HIDPI) {
         moonSourceWidth *= 2;
@@ -100,7 +101,7 @@ class NightMode {
 
     // Stars.
     if (this.drawStars) {
-        for (var i = 0; i < NightMode.config.NUM_STARS; i++) {
+        for (let i = 0; i < NightMode.config.NUM_STARS; i++) {
             this.canvasCtx.drawImage(this.starSprite,
                 starSourceX, this.stars[i].sourceY, starSize, starSize,
                 Math.round(this.stars[i].x), this.stars[i].y,
@@ -109,7 +110,6 @@ class NightMode {
     }
 
     // Moon.
-    console.log(IS_HIDPI, moonSourceWidth, moonSourceHeight, moonOutputWidth, NightMode.config.HEIGHT);
     this.canvasCtx.drawImage(this.moonSprite, moonSourceX,
         this.moonSpritePos.y, moonSourceWidth, moonSourceHeight,
         Math.round(this.xPos), this.yPos,
@@ -121,10 +121,10 @@ class NightMode {
 
   // Do star placement.
   placeStars() {
-    var segmentSize = Math.round(this.containerWidth /
+    let segmentSize = Math.round(this.containerWidth /
       NightMode.config.NUM_STARS);
 
-    for (var i = 0; i < NightMode.config.NUM_STARS; i++) {
+    for (let i = 0; i < NightMode.config.NUM_STARS; i++) {
       this.stars[i] = {};
       this.stars[i].x = getRandomNum(segmentSize * i, segmentSize * (i + 1));
       this.stars[i].y = getRandomNum(0, NightMode.config.STAR_MAX_Y);
@@ -144,8 +144,7 @@ class NightMode {
     this.opacity = 0;
     this.update(false);
   }
-
-}
+};
 
 NightMode = Object.assign(NightMode, nightModeConfig);
 

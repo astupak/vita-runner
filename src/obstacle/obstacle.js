@@ -1,6 +1,5 @@
 import {
   obstacleConfig,
-  runnerConfig,
   IS_MOBILE,
   IS_HIDPI,
   FPS,
@@ -14,7 +13,7 @@ class Obstacle {
     this.canvasCtx = canvasCtx;
     this.spritePos = {x:0, y:0};
     this.typeConfig = type;
-    this.gapCoefficient = runnerConfig.GAP_COEFFICIENT;
+    this.gapCoefficient = Obstacle.GAP_COEFFICIENT;
     this.size = getRandomNum(1, Obstacle.MAX_OBSTACLE_LENGTH);
     this.dimensions = DIMENSIONS;
     this.remove = false;
@@ -28,16 +27,13 @@ class Obstacle {
     // For animated obstacles.
     this.currentFrame = 0;
     this.timer = 0;
+
     this.setSprite(type);
     this.init(speed);
   }
 
   setSprite({type}) {
-    if (IS_HIDPI) {
-      this.sprite = document.getElementById(Obstacle.spriteIds.HDPI[type]);
-    } else {
-      this.sprite = document.getElementById(Obstacle.spriteIds.LDPI[type])
-    }  
+    this.sprite = Obstacle[`${type}_SPRITE`];
   }
 
   init(speed) {
@@ -52,7 +48,7 @@ class Obstacle {
 
     // Check if obstacle can be positioned at various heights.
     if (Array.isArray(this.typeConfig.yPos)) {
-      var yPosConfig = IS_MOBILE ? this.typeConfig.yPosMobile :
+      let yPosConfig = IS_MOBILE ? this.typeConfig.yPosMobile :
         this.typeConfig.yPos;
       this.yPos = yPosConfig[getRandomNum(0, yPosConfig.length - 1)];
     } else {
@@ -88,9 +84,8 @@ class Obstacle {
    * Draw and crop based on size.
    */
   draw() {
-    console.log(123);
-    var sourceWidth = this.typeConfig.width;
-    var sourceHeight = this.typeConfig.height;
+    let sourceWidth = this.typeConfig.sourceDimensions.width;
+    let sourceHeight = this.typeConfig.sourceDimensions.height;
 
     if (IS_HIDPI) {
       sourceWidth = sourceWidth * 2;
@@ -98,7 +93,7 @@ class Obstacle {
     }
 
     // X position in sprite.
-    var sourceX = (sourceWidth * this.size) * (0.5 * (this.size - 1)) +
+    let sourceX = (sourceWidth * this.size) * (0.5 * (this.size - 1)) +
       this.spritePos.x;
 
     // Animation frames.
@@ -151,9 +146,9 @@ class Obstacle {
    * @return {number} The gap size.
    */
   getGap(gapCoefficient, speed) {
-    var minGap = Math.round(this.width * speed +
+    let minGap = Math.round(this.width * speed +
       this.typeConfig.minGap * gapCoefficient);
-    var maxGap = Math.round(minGap * Obstacle.MAX_GAP_COEFFICIENT);
+    let maxGap = Math.round(minGap * Obstacle.MAX_GAP_COEFFICIENT);
     return getRandomNum(minGap, maxGap);
   }
 
@@ -170,16 +165,26 @@ class Obstacle {
    * obstacle type and size.
    */
   cloneCollisionBoxes() {
-    var collisionBoxes = this.typeConfig.collisionBoxes;
+    let collisionBoxes = this.typeConfig.collisionBoxes;
 
-    for (var i = collisionBoxes.length - 1; i >= 0; i--) {
+    for (let i = collisionBoxes.length - 1; i >= 0; i--) {
       this.collisionBoxes[i] = new CollisionBox(collisionBoxes[i].x,
         collisionBoxes[i].y, collisionBoxes[i].width,
         collisionBoxes[i].height);
     }
   }
-}
+};
 
 Obstacle = Object.assign(Obstacle, obstacleConfig);
+
+Obstacle.initSprites = () => {
+  for (let {type} of Obstacle.types) {
+    if (IS_HIDPI) {
+      Obstacle[`${type}_SPRITE`] = document.getElementById(Obstacle.spriteIds.HDPI[type])
+    } else {
+      Obstacle[`${type}_SPRITE`] = document.getElementById(Obstacle.spriteIds.LDPI[type]);
+    }  
+  }
+};
 
 export default Obstacle;

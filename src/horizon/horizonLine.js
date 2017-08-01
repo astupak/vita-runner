@@ -7,16 +7,16 @@ import {
 class HorizonLine {
   constructor(canvas) {
     this.spritePos = {x: 0, y: 0};
+    this.sourceDimensions = HorizonLine.sourceDimensions;
     this.sprite = null;
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
-    this.sourceDimensions = {};
     this.dimensions = HorizonLine.dimensions;
     this.sourceXPos = [this.spritePos.x, this.spritePos.x +
-        this.dimensions.WIDTH];
+        this.sourceDimensions.WIDTH];
     this.xPos = [];
     this.yPos = 0;
-    this.bumpThreshold = 0.5;
+    this.bumpThreshold = HorizonLine.BUMP_THRESHOLD;
 
     this.setSourceDimensions();
     this.setSprite();
@@ -28,17 +28,15 @@ class HorizonLine {
    */
   setSourceDimensions() {
 
-    for (var dimension in HorizonLine.dimensions) {
+    for (let dimension in HorizonLine.sourceDimensions) {
       if (IS_HIDPI) {
         if (dimension != 'YPOS') {
-          this.sourceDimensions[dimension] =
-            HorizonLine.dimensions[dimension] * 2;
-            console.log(this.sourceDimensions);
+          this.sourceDimensions[dimension] = HorizonLine.sourceDimensions[dimension] * 2;
         }
       } else {
-        this.sourceDimensions[dimension] =
-          HorizonLine.dimensions[dimension];
+        this.sourceDimensions[dimension] = HorizonLine.sourceDimensions[dimension];
       }
+
       this.dimensions[dimension] = HorizonLine.dimensions[dimension];
     }
 
@@ -58,14 +56,13 @@ class HorizonLine {
    * Return the crop x position of a type.
    */
   getRandomType() {
-    return Math.random() > this.bumpThreshold ? this.dimensions.WIDTH : 0;
+    return Math.random() > this.bumpThreshold ? this.sourceDimensions.WIDTH : 0;
   }
 
   /**
    * Draw the horizon line.
    */
   draw() {
-    console.log(this.xPos[0],this.xPos[1])
     this.canvasCtx.drawImage(this.sprite, this.sourceXPos[0],
       this.spritePos.y,
       this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
@@ -77,7 +74,6 @@ class HorizonLine {
       this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
       this.xPos[1], this.yPos,
       this.dimensions.WIDTH, this.dimensions.HEIGHT);
-    console.log(this.xPos[0],this.xPos[1])
   }
 
   /**
@@ -86,9 +82,8 @@ class HorizonLine {
    * @param {number} increment
    */
   updateXPos(pos, increment) {
-    var line1 = pos;
-    var line2 = pos == 0 ? 1 : 0;
-    console.log(line1, line2);
+    let line1 = pos;
+    let line2 = pos == 0 ? 1 : 0;
     this.xPos[line1] -= increment;
     this.xPos[line2] = this.xPos[line1] + this.dimensions.WIDTH;
 
@@ -106,7 +101,7 @@ class HorizonLine {
    * @param {number} speed
    */
   update(deltaTime, speed) {
-    var increment = Math.floor(speed * (FPS / 1000) * deltaTime);
+    let increment = Math.floor(speed * (FPS / 1000) * deltaTime);
 
     if (this.xPos[0] <= 0) {
       this.updateXPos(0, increment);
@@ -123,7 +118,7 @@ class HorizonLine {
     this.xPos[0] = 0;
     this.xPos[1] = HorizonLine.dimensions.WIDTH;
   }
-}
+};
 
 HorizonLine = Object.assign(HorizonLine, horizonLineConfig);
 

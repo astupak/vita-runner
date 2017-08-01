@@ -1,11 +1,17 @@
 export const config = {
+  HEIGHT: 21,
+  MAX_CLOUD_GAP: 800,
+  MAX_SKY_LEVEL: 45,
+  MIN_CLOUD_GAP: 150,
+  MIN_SKY_LEVEL: 120,
+  WIDTH: 69
+};
+
+export const sourceDimensions = {
   HEIGHT: 14,
-  MAX_CLOUD_GAP: 400,
-  MAX_SKY_LEVEL: 30,
-  MIN_CLOUD_GAP: 100,
-  MIN_SKY_LEVEL: 71,
   WIDTH: 46
 };
+
 
 export const spriteIds = {
   LDPI: {

@@ -4,9 +4,8 @@ import {
   IS_HIDPI,
 } from 'Configs';
 
-
 class GameOverPanel {
-  constructor(canvas, textImgPos, restartImgPos, dimensions) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
     this.canvasDimensions = DIMENSIONS;
@@ -22,14 +21,11 @@ class GameOverPanel {
     if (IS_HIDPI) {
       this.textSprite = document.getElementById(GameOverPanel.spriteIds.HDPI.GAME_OVER);
       this.restartSprite = document.getElementById(GameOverPanel.spriteIds.HDPI.RESTART);
-
     } else {
       this.textSprite = document.getElementById(GameOverPanel.spriteIds.LDPI.GAME_OVER);
       this.restartSprite = document.getElementById(GameOverPanel.spriteIds.LDPI.RESTART);
-
     }
   }
-
 
   updateDimensions(width, opt_height) {
     this.canvasDimensions.WIDTH = width;
@@ -42,25 +38,25 @@ class GameOverPanel {
    * Draw the panel.
    */
   draw() {
-    var dimensions = GameOverPanel.dimensions;
+    let dimensions = GameOverPanel.dimensions;
 
-    var centerX = this.canvasDimensions.WIDTH / 2;
+    let centerX = this.canvasDimensions.WIDTH / 2;
 
     // Game over text.
-    var textSourceX = dimensions.TEXT_X;
-    var textSourceY = dimensions.TEXT_Y;
-    var textSourceWidth = dimensions.TEXT_WIDTH;
-    var textSourceHeight = dimensions.TEXT_HEIGHT;
+    let textSourceX = dimensions.TEXT_X;
+    let textSourceY = dimensions.TEXT_Y;
+    let textSourceWidth = dimensions.TEXT_WIDTH;
+    let textSourceHeight = dimensions.TEXT_HEIGHT;
 
-    var textTargetX = Math.round(centerX - (dimensions.TEXT_WIDTH / 2));
-    var textTargetY = Math.round((this.canvasDimensions.HEIGHT - 25) / 3);
-    var textTargetWidth = dimensions.TEXT_WIDTH;
-    var textTargetHeight = dimensions.TEXT_HEIGHT;
+    let textTargetX = Math.round(centerX - (dimensions.TEXT_WIDTH / 2));
+    let textTargetY = Math.round((this.canvasDimensions.HEIGHT - 25) / 3);
+    let textTargetWidth = dimensions.TEXT_WIDTH;
+    let textTargetHeight = dimensions.TEXT_HEIGHT;
 
-    var restartSourceWidth = dimensions.RESTART_WIDTH;
-    var restartSourceHeight = dimensions.RESTART_HEIGHT;
-    var restartTargetX = centerX - (dimensions.RESTART_WIDTH / 2);
-    var restartTargetY = this.canvasDimensions.HEIGHT / 2;
+    let restartSourceWidth = dimensions.RESTART_WIDTH;
+    let restartSourceHeight = dimensions.RESTART_HEIGHT;
+    let restartTargetX = centerX - (dimensions.RESTART_WIDTH / 2);
+    let restartTargetY = this.canvasDimensions.HEIGHT / 2;
 
     if (IS_HIDPI) {
       textSourceY *= 2;
@@ -75,7 +71,6 @@ class GameOverPanel {
     textSourceY += this.textImgPos.y;
 
     // Game over text from sprite.
-    console.log(textSourceX, textSourceY);
     this.canvasCtx.drawImage(this.textSprite,
       textSourceX, textSourceY, textSourceWidth, textSourceHeight,
       textTargetX, textTargetY, textTargetWidth, textTargetHeight);
@@ -87,7 +82,7 @@ class GameOverPanel {
       restartTargetX, restartTargetY, dimensions.RESTART_WIDTH,
       dimensions.RESTART_HEIGHT);
   }
-}
+};
 
 GameOverPanel = Object.assign(GameOverPanel, gameOverPanelConfig);
 

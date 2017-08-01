@@ -18,15 +18,15 @@ import Horizon from '../horizon';
 import Trex from '../trex';
 import DistanceMeter from '../distanceMeter';
 import GameOverPanel from '../gameOverPanel';
+import Obstacle from '../obstacle';
+import Cloud from '../cloud';
 import { checkForCollision } from '../collision';
 import ImagesLoader from './imagesLoader';
 
 class Runner {
   constructor(outerContainerId, opt_config) {
-    console.log('construct');
     this.outerContainerEl = document.querySelector(outerContainerId);
     this.containerEl = null;
-    this.snackbarEl = null;
     this.detailsButton = this.outerContainerEl.querySelector('#details-button');
 
     this.config = opt_config || Runner.config;
@@ -71,6 +71,8 @@ class Runner {
     this.images = {};
     this.imagesLoaded = 0;
 
+    this.adjustDimensions();
+
     if (this.isDisabled()) {
       this.setupDisabledRunner();
     } else {
@@ -102,31 +104,6 @@ class Runner {
   }
 
   /**
-   * Setting individual settings for debugging.
-   * @param {string} setting
-   * @param {*} value
-   */
-  updateConfigSetting(setting, value) {
-    if (setting in this.config && value != undefined) {
-      this.config[setting] = value;
-
-      switch (setting) {
-        case 'GRAVITY':
-        case 'MIN_JUMP_HEIGHT':
-        case 'SPEED_DROP_COEFFICIENT':
-          this.tRex.config[setting] = value;
-          break;
-        case 'INITIAL_JUMP_VELOCITY':
-          this.tRex.setJumpVelocity(value);
-          break;
-        case 'SPEED':
-          this.setSpeed(value);
-          break;
-      }
-    }
-  }
-
-  /**
    * Cache the appropriate image sprite from the page and get the sprite sheet
    * definition.
    */
@@ -135,12 +112,8 @@ class Runner {
 
     if (IS_HIDPI) {
       spriteIds = Runner.spriteIds['HDPI'];
-      this.spriteDef = Runner.spriteDefinition.HDPI;
-
     } else {
       spriteIds = Runner.spriteIds['LDPI'];
-      this.spriteDef = Runner.spriteDefinition.LDPI;
-
     }
 
     imagesLoader = new ImagesLoader(spriteIds);
@@ -159,14 +132,14 @@ class Runner {
     if (!IS_IOS) {
       this.audioContext = new AudioContext();
 
-      var resourceTemplate =
+      let resourceTemplate =
         document.getElementById(this.config.RESOURCE_TEMPLATE_ID).content;
 
-      for (var sound in Runner.sounds) {
-        var soundSrc =
+      for (let sound in Runner.sounds) {
+        let soundSrc =
           resourceTemplate.getElementById(Runner.sounds[sound]).src;
         soundSrc = soundSrc.substr(soundSrc.indexOf(',') + 1);
-        var buffer = decodeBase64ToArrayBuffer(soundSrc);
+        let buffer = decodeBase64ToArrayBuffer(soundSrc);
 
         // Async, so no guarantee of order in array.
         this.audioContext.decodeAudioData(buffer, function(index, audioData) {
@@ -181,11 +154,11 @@ class Runner {
    * @param {number} opt_speed
    */
   setSpeed(opt_speed) {
-    var speed = opt_speed || this.currentSpeed;
+    let speed = opt_speed || this.currentSpeed;
 
     // Reduce the speed on smaller mobile screens.
     if (this.dimensions.WIDTH < DEFAULT_WIDTH) {
-      var mobileSpeed = speed * this.dimensions.WIDTH / DEFAULT_WIDTH *
+      let mobileSpeed = speed * this.dimensions.WIDTH / DEFAULT_WIDTH *
         this.config.MOBILE_SPEED_COEFFICIENT;
       this.currentSpeed = mobileSpeed > speed ? speed : mobileSpeed;
     } else if (opt_speed) {
@@ -197,8 +170,6 @@ class Runner {
    * Game initialiser.
    */
   init() {
-        console.log('init');
-
     // Hide the static icon.
     document.querySelector('.' + Runner.classes.ICON).style.visibility =
       'hidden';
@@ -210,7 +181,6 @@ class Runner {
     this.containerEl.className = Runner.classes.CONTAINER;
 
     // Player canvas container.
-    console.log(this.dimensions);
     this.canvas = createCanvas(this.containerEl, this.dimensions.WIDTH,
       this.dimensions.HEIGHT, Runner.classes.PLAYER);
 
@@ -219,17 +189,18 @@ class Runner {
     this.canvasCtx.fill();
     Runner.updateCanvasScaling(this.canvas);
 
+    Cloud.initSprites();
+    Obstacle.initSprites();
+
     // Horizon contains clouds, obstacles and the ground.
-    console.log(this.spriteDef, this.dimensions,
-      this.config.GAP_COEFFICIENT);
     this.horizon = new Horizon(this.canvas);
 
     // Distance meter
-    this.distanceMeter = new DistanceMeter(this.canvas,
-      this.spriteDef.TEXT_SPRITE, this.dimensions.WIDTH);
+    this.distanceMeter = new DistanceMeter(this.canvas);
 
     // Draw t-rex
     this.tRex = new Trex(this.canvas);
+
 
     this.outerContainerEl.appendChild(this.containerEl);
 
@@ -270,8 +241,8 @@ class Runner {
     clearInterval(this.resizeTimerId_);
     this.resizeTimerId_ = null;
 
-    var boxStyles = window.getComputedStyle(this.outerContainerEl);
-    var padding = Number(boxStyles.paddingLeft.substr(0,
+    let boxStyles = window.getComputedStyle(this.outerContainerEl);
+    let padding = Number(boxStyles.paddingLeft.substr(0,
       boxStyles.paddingLeft.length - 2));
 
     this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
@@ -316,7 +287,7 @@ class Runner {
       this.tRex.playingIntro = true;
 
       // CSS animation definition.
-      var keyframes = '@-webkit-keyframes intro { ' +
+      let keyframes = '@-webkit-keyframes intro { ' +
         'from { width:' + Trex.config.WIDTH + 'px }' +
         'to { width: ' + this.dimensions.WIDTH + 'px }' +
         '}';
@@ -371,8 +342,8 @@ class Runner {
   update() {
     this.updatePending = false;
 
-    var now = getTimeStamp();
-    var deltaTime = now - (this.time || now);
+    let now = getTimeStamp();
+    let deltaTime = now - (this.time || now);
     this.time = now;
 
     if (this.playing) {
@@ -383,7 +354,7 @@ class Runner {
       }
 
       this.runningTime += deltaTime;
-      var hasObstacles = this.runningTime > this.config.CLEAR_TIME;
+      let hasObstacles = this.runningTime > this.config.CLEAR_TIME;
 
       // First jump triggers the intro.
       if (this.tRex.jumpCount == 1 && !this.playingIntro) {
@@ -400,8 +371,8 @@ class Runner {
       }
 
       // Check for collisions.
-      var collision = hasObstacles &&
-        checkForCollision(this.horizon.obstacles[0], this.tRex);
+      let collision = hasObstacles &&
+        checkForCollision(this.horizon.obstacles[0], this.tRex, this.canvasCtx);
 
       if (!collision) {
         this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
@@ -413,7 +384,7 @@ class Runner {
         this.gameOver();
       }
 
-      var playAchievementSound = this.distanceMeter.update(deltaTime,
+      let playAchievementSound = this.distanceMeter.update(deltaTime,
         Math.ceil(this.distanceRan));
 
       if (playAchievementSound) {
@@ -428,7 +399,7 @@ class Runner {
       } else if (this.invertTimer) {
         this.invertTimer += deltaTime;
       } else {
-        var actualDistance =
+        let actualDistance =
           this.distanceMeter.getActualDistance(Math.ceil(this.distanceRan));
 
         if (actualDistance > 0) {
@@ -475,7 +446,6 @@ class Runner {
    */
   startListening() {
     // Keys.
-    console.log(this);
     document.addEventListener(Runner.events.KEYDOWN, this);
     document.addEventListener(Runner.events.KEYUP, this);
 
@@ -560,8 +530,8 @@ class Runner {
    * @param {Event} e
    */
   onKeyUp(e) {
-    var keyCode = String(e.keyCode);
-    var isjumpKey = Runner.keycodes.JUMP[keyCode] ||
+    let keyCode = String(e.keyCode);
+    let isjumpKey = Runner.keycodes.JUMP[keyCode] ||
       e.type == Runner.events.TOUCHEND ||
       e.type == Runner.events.MOUSEDOWN;
 
@@ -572,7 +542,7 @@ class Runner {
       this.tRex.setDuck(false);
     } else if (this.crashed) {
       // Check that enough time has elapsed before allowing jump key to restart.
-      var deltaTime = getTimeStamp() - this.time;
+      let deltaTime = getTimeStamp() - this.time;
 
       if (Runner.keycodes.RESTART[keyCode] || this.isLeftClickOnCanvas(e) ||
         (deltaTime >= this.config.GAMEOVER_CLEAR_TIME &&
@@ -630,9 +600,7 @@ class Runner {
 
     // Game over panel.
     if (!this.gameOverPanel) {
-      this.gameOverPanel = new GameOverPanel(this.canvas,
-        this.spriteDef.TEXT_SPRITE, this.spriteDef.RESTART,
-        this.dimensions);
+      this.gameOverPanel = new GameOverPanel(this.canvas);
     } else {
       this.gameOverPanel.draw();
     }
@@ -703,7 +671,7 @@ class Runner {
    */
   playSound(soundBuffer) {
     if (soundBuffer) {
-      var sourceNode = this.audioContext.createBufferSource();
+      let sourceNode = this.audioContext.createBufferSource();
       sourceNode.buffer = soundBuffer;
       sourceNode.connect(this.audioContext.destination);
       sourceNode.start(0);
@@ -728,18 +696,18 @@ class Runner {
 
 Runner = Object.assign(Runner, runnerConfig);
 
-Runner.updateCanvasScaling = function(canvas, opt_width, opt_height) {
-  var context = canvas.getContext('2d');
+Runner.updateCanvasScaling = (canvas, opt_width, opt_height) => {
+  let context = canvas.getContext('2d');
 
-  // Query the various pixel ratios
-  var devicePixelRatio = Math.floor(window.devicePixelRatio) || 1;
-  var backingStoreRatio = Math.floor(context.webkitBackingStorePixelRatio) || 1;
-  var ratio = devicePixelRatio / backingStoreRatio;
+  // Query the let pixel ratios
+  let devicePixelRatio = Math.floor(window.devicePixelRatio) || 1;
+  let backingStoreRatio = Math.floor(context.webkitBackingStorePixelRatio) || 1;
+  let ratio = devicePixelRatio / backingStoreRatio;
 
   // Upscale the canvas if the two ratios don't match
   if (devicePixelRatio !== backingStoreRatio) {
-    var oldWidth = opt_width || canvas.width;
-    var oldHeight = opt_height || canvas.height;
+    let oldWidth = opt_width || canvas.width;
+    let oldHeight = opt_height || canvas.height;
 
     canvas.width = oldWidth * ratio;
     canvas.height = oldHeight * ratio;
@@ -759,7 +727,5 @@ Runner.updateCanvasScaling = function(canvas, opt_width, opt_height) {
   }
   return false;
 };
-
-
 
 export default Runner;

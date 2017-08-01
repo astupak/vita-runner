@@ -35,6 +35,6 @@ class ImagesLoader {
     this.loadedCallback = callback;
     this.addEventListeners();
   }
-}
+};
 
 export default ImagesLoader;
