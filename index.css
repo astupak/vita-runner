@@ -9,6 +9,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  /*zoom: 1.7;*/
+}
+
 .icon {
   -webkit-user-select: none;
   user-select: none;
@@ -32,14 +36,14 @@ html, body {
   font-size: 1em;
   line-height: 1.55;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 900px;
   padding-top: 100px;
   width: 100%;
 }
 
 .offline .runner-container {
-  height: 150px;
-  max-width: 600px;
+  height: 225px;
+  max-width: 900px;
   overflow: hidden;
   position: absolute;
   top: 35px;
@@ -47,8 +51,8 @@ html, body {
 }
 
 .offline .runner-canvas {
-  height: 150px;
-  max-width: 600px;
+  height: 225px;
+  max-width: 900px;
   opacity: 1;
   overflow: hidden;
   position: absolute;

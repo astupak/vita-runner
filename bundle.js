@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -87,39 +87,39 @@ Object.keys(_consts).forEach(function (key) {
   });
 });
 
-var _trexConfig = __webpack_require__(7);
+var _trexConfig = __webpack_require__(9);
 
 var trexConfig = _interopRequireWildcard(_trexConfig);
 
-var _cloudConfig = __webpack_require__(9);
+var _cloudConfig = __webpack_require__(11);
 
 var cloudConfig = _interopRequireWildcard(_cloudConfig);
 
-var _runnerConfig = __webpack_require__(10);
+var _runnerConfig = __webpack_require__(12);
 
 var runnerConfig = _interopRequireWildcard(_runnerConfig);
 
-var _horizonConfig = __webpack_require__(11);
+var _horizonConfig = __webpack_require__(13);
 
 var horizonConfig = _interopRequireWildcard(_horizonConfig);
 
-var _obstacleConfig = __webpack_require__(12);
+var _obstacleConfig = __webpack_require__(14);
 
 var obstacleConfig = _interopRequireWildcard(_obstacleConfig);
 
-var _nightModeConfig = __webpack_require__(13);
+var _nightModeConfig = __webpack_require__(15);
 
 var nightModeConfig = _interopRequireWildcard(_nightModeConfig);
 
-var _horizonLineConfig = __webpack_require__(14);
+var _horizonLineConfig = __webpack_require__(16);
 
 var horizonLineConfig = _interopRequireWildcard(_horizonLineConfig);
 
-var _distanceMeterConfig = __webpack_require__(15);
+var _distanceMeterConfig = __webpack_require__(17);
 
 var distanceMeterConfig = _interopRequireWildcard(_distanceMeterConfig);
 
-var _gameOverPanelConfig = __webpack_require__(16);
+var _gameOverPanelConfig = __webpack_require__(18);
 
 var gameOverPanelConfig = _interopRequireWildcard(_gameOverPanelConfig);
 
@@ -156,7 +156,7 @@ var _Configs = __webpack_require__(0);
 var classes = _Configs.runnerConfig.classes;
 function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 /**
  * Vibrate on mobile devices.
@@ -166,7 +166,7 @@ function vibrate(duration) {
   if (_Configs.IS_MOBILE && window.navigator.vibrate) {
     window.navigator.vibrate(duration);
   }
-}
+};
 
 /**
  * Create canvas element.
@@ -184,7 +184,7 @@ function createCanvas(container, width, height, opt_classname) {
   container.appendChild(canvas);
 
   return canvas;
-}
+};
 
 /**
  * Decodes the base 64 audio to ArrayBuffer used by Web Audio.
@@ -200,7 +200,7 @@ function decodeBase64ToArrayBuffer(base64String) {
     bytes[i] = str.charCodeAt(i);
   }
   return bytes.buffer;
-}
+};
 
 /**
  * Return the current timestamp.
@@ -208,7 +208,7 @@ function decodeBase64ToArrayBuffer(base64String) {
  */
 function getTimeStamp() {
   return _Configs.IS_IOS ? new Date().getTime() : performance.now();
-}
+};
 
 /***/ }),
 /* 2 */
@@ -221,7 +221,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _collisionBox = __webpack_require__(8);
+var _collisionBox = __webpack_require__(10);
 
 Object.keys(_collisionBox).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -247,9 +247,9 @@ Object.defineProperty(exports, "__esModule", {
  * Default game width.
  * @const
  */
-var DEFAULT_WIDTH = exports.DEFAULT_WIDTH = 600;
+var DEFAULT_WIDTH = exports.DEFAULT_WIDTH = 900;
 
-var DEFAULT_HEIGHT = exports.DEFAULT_HEIGHT = 150;
+var DEFAULT_HEIGHT = exports.DEFAULT_HEIGHT = 225;
 
 var DIMENSIONS = exports.DIMENSIONS = {
   WIDTH: DEFAULT_WIDTH,
@@ -262,7 +262,7 @@ var DIMENSIONS = exports.DIMENSIONS = {
 };var FPS = exports.FPS = 60;
 
 /** @const */
-var IS_HIDPI = exports.IS_HIDPI = window.devicePixelRatio > 1 && false;
+var IS_HIDPI = exports.IS_HIDPI = window.devicePixelRatio > 1;
 
 /** @const */
 var IS_IOS = exports.IS_IOS = /iPad|iPhone|iPod/.test(window.navigator.platform);
@@ -280,7 +280,45 @@ var IS_TOUCH_ENABLED = exports.IS_TOUCH_ENABLED = 'ontouchstart' in window;
 "use strict";
 
 
-var _runner = __webpack_require__(5);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _cloud = __webpack_require__(24);
+
+var _cloud2 = _interopRequireDefault(_cloud);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _cloud2.default;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _obstacle = __webpack_require__(25);
+
+var _obstacle2 = _interopRequireDefault(_obstacle);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _obstacle2.default;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _runner = __webpack_require__(7);
 
 var _runner2 = _interopRequireDefault(_runner);
 
@@ -297,7 +335,7 @@ function onDocumentLoad() {
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -307,7 +345,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _runner = __webpack_require__(6);
+var _runner = __webpack_require__(8);
 
 var _runner2 = _interopRequireDefault(_runner);
 
@@ -316,7 +354,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _runner2.default;
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -332,7 +370,7 @@ var _Configs = __webpack_require__(0);
 
 var _service = __webpack_require__(1);
 
-var _horizon = __webpack_require__(17);
+var _horizon = __webpack_require__(19);
 
 var _horizon2 = _interopRequireDefault(_horizon);
 
@@ -344,9 +382,21 @@ var _distanceMeter = __webpack_require__(28);
 
 var _distanceMeter2 = _interopRequireDefault(_distanceMeter);
 
+var _gameOverPanel = __webpack_require__(30);
+
+var _gameOverPanel2 = _interopRequireDefault(_gameOverPanel);
+
+var _obstacle = __webpack_require__(5);
+
+var _obstacle2 = _interopRequireDefault(_obstacle);
+
+var _cloud = __webpack_require__(4);
+
+var _cloud2 = _interopRequireDefault(_cloud);
+
 var _collision = __webpack_require__(2);
 
-var _imagesLoader = __webpack_require__(30);
+var _imagesLoader = __webpack_require__(32);
 
 var _imagesLoader2 = _interopRequireDefault(_imagesLoader);
 
@@ -358,10 +408,8 @@ var Runner = function () {
   function Runner(outerContainerId, opt_config) {
     _classCallCheck(this, Runner);
 
-    console.log('construct');
     this.outerContainerEl = document.querySelector(outerContainerId);
     this.containerEl = null;
-    this.snackbarEl = null;
     this.detailsButton = this.outerContainerEl.querySelector('#details-button');
 
     this.config = opt_config || Runner.config;
@@ -406,6 +454,8 @@ var Runner = function () {
     this.images = {};
     this.imagesLoaded = 0;
 
+    this.adjustDimensions();
+
     if (this.isDisabled()) {
       this.setupDisabledRunner();
     } else {
@@ -442,34 +492,6 @@ var Runner = function () {
     }
 
     /**
-     * Setting individual settings for debugging.
-     * @param {string} setting
-     * @param {*} value
-     */
-
-  }, {
-    key: 'updateConfigSetting',
-    value: function updateConfigSetting(setting, value) {
-      if (setting in this.config && value != undefined) {
-        this.config[setting] = value;
-
-        switch (setting) {
-          case 'GRAVITY':
-          case 'MIN_JUMP_HEIGHT':
-          case 'SPEED_DROP_COEFFICIENT':
-            this.tRex.config[setting] = value;
-            break;
-          case 'INITIAL_JUMP_VELOCITY':
-            this.tRex.setJumpVelocity(value);
-            break;
-          case 'SPEED':
-            this.setSpeed(value);
-            break;
-        }
-      }
-    }
-
-    /**
      * Cache the appropriate image sprite from the page and get the sprite sheet
      * definition.
      */
@@ -482,10 +504,8 @@ var Runner = function () {
 
       if (_Configs.IS_HIDPI) {
         spriteIds = Runner.spriteIds['HDPI'];
-        this.spriteDef = Runner.spriteDefinition.HDPI;
       } else {
         spriteIds = Runner.spriteIds['LDPI'];
-        this.spriteDef = Runner.spriteDefinition.LDPI;
       }
 
       imagesLoader = new _imagesLoader2.default(spriteIds);
@@ -548,8 +568,6 @@ var Runner = function () {
   }, {
     key: 'init',
     value: function init() {
-      console.log('init');
-
       // Hide the static icon.
       document.querySelector('.' + Runner.classes.ICON).style.visibility = 'hidden';
 
@@ -560,7 +578,6 @@ var Runner = function () {
       this.containerEl.className = Runner.classes.CONTAINER;
 
       // Player canvas container.
-      console.log(this.dimensions);
       this.canvas = (0, _service.createCanvas)(this.containerEl, this.dimensions.WIDTH, this.dimensions.HEIGHT, Runner.classes.PLAYER);
 
       this.canvasCtx = this.canvas.getContext('2d');
@@ -568,12 +585,14 @@ var Runner = function () {
       this.canvasCtx.fill();
       Runner.updateCanvasScaling(this.canvas);
 
+      _cloud2.default.initSprites();
+      _obstacle2.default.initSprites();
+
       // Horizon contains clouds, obstacles and the ground.
-      console.log(this.spriteDef, this.dimensions, this.config.GAP_COEFFICIENT);
       this.horizon = new _horizon2.default(this.canvas);
 
       // Distance meter
-      this.distanceMeter = new _distanceMeter2.default(this.canvas, this.spriteDef.TEXT_SPRITE, this.dimensions.WIDTH);
+      this.distanceMeter = new _distanceMeter2.default(this.canvas);
 
       // Draw t-rex
       this.tRex = new _trex2.default(this.canvas);
@@ -753,7 +772,7 @@ var Runner = function () {
         }
 
         // Check for collisions.
-        var collision = hasObstacles && (0, _collision.checkForCollision)(this.horizon.obstacles[0], this.tRex);
+        var collision = hasObstacles && (0, _collision.checkForCollision)(this.horizon.obstacles[0], this.tRex, this.canvasCtx);
 
         if (!collision) {
           this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
@@ -829,7 +848,6 @@ var Runner = function () {
     key: 'startListening',
     value: function startListening() {
       // Keys.
-      console.log(this);
       document.addEventListener(Runner.events.KEYDOWN, this);
       document.addEventListener(Runner.events.KEYUP, this);
 
@@ -987,7 +1005,7 @@ var Runner = function () {
     key: 'gameOver',
     value: function gameOver() {
       this.playSound(this.soundFx.HIT);
-      vibrate(200);
+      (0, _service.vibrate)(200);
 
       this.stop();
       this.crashed = true;
@@ -997,7 +1015,7 @@ var Runner = function () {
 
       // Game over panel.
       if (!this.gameOverPanel) {
-        this.gameOverPanel = new GameOverPanel(this.canvas, this.spriteDef.TEXT_SPRITE, this.spriteDef.RESTART, this.dimensions);
+        this.gameOverPanel = new _gameOverPanel2.default(this.canvas);
       } else {
         this.gameOverPanel.draw();
       }
@@ -1109,7 +1127,7 @@ Runner = Object.assign(Runner, _Configs.runnerConfig);
 Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
   var context = canvas.getContext('2d');
 
-  // Query the various pixel ratios
+  // Query the let pixel ratios
   var devicePixelRatio = Math.floor(window.devicePixelRatio) || 1;
   var backingStoreRatio = Math.floor(context.webkitBackingStorePixelRatio) || 1;
   var ratio = devicePixelRatio / backingStoreRatio;
@@ -1141,88 +1159,91 @@ Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
 exports.default = Runner;
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.spriteIds = exports.animFrames = exports.BLINK_TIMING = exports.status = exports.collisionBoxes = exports.config = undefined;
+exports.spriteIds = exports.animFrames = exports.BLINK_TIMING = exports.status = exports.collisionBoxes = exports.sourceDimensions = exports.config = undefined;
 
 var _collision = __webpack_require__(2);
 
 var config = exports.config = {
-  SOURCE_WIDTH: 375,
-  SOURCE_HEIGHT: 707,
-  SOURCE_WIDTH_DUCK: 362,
-  SOURCE_HEIGHT_DUCK: 507,
-  DROP_VELOCITY: -5,
-  GRAVITY: 0.6,
-  HEIGHT: 47,
-  HEIGHT_DUCK: 25,
-  INIITAL_JUMP_VELOCITY: -10,
-  INTRO_DURATION: 1500,
-  MAX_JUMP_HEIGHT: 30,
-  MIN_JUMP_HEIGHT: 30,
-  SPEED_DROP_COEFFICIENT: 3,
-  SPRITE_WIDTH: 262,
-  START_X_POS: 50,
-  WIDTH: 44,
-  WIDTH_DUCK: 59
+    BOTTOM_PAD: 10,
+    DROP_VELOCITY: -8,
+    GRAVITY: 0.6,
+    HEIGHT: 95,
+    HEIGHT_DUCK: 70,
+    INIITAL_JUMP_VELOCITY: -13,
+    INTRO_DURATION: 1200,
+    MAX_JUMP_HEIGHT: 60,
+    MIN_JUMP_HEIGHT: 60,
+    SPEED_DROP_COEFFICIENT: 3,
+    START_X_POS: 50,
+    WIDTH: 60,
+    WIDTH_DUCK: 60
+};
+
+var sourceDimensions = exports.sourceDimensions = {
+    WIDTH: 188,
+    HEIGHT: 354,
+    WIDTH_DUCK: 181,
+    HEIGHT_DUCK: 254
 };
 
 var collisionBoxes = exports.collisionBoxes = {
-  DUCKING: [new _collision.CollisionBox(1, 18, 55, 25)],
-  RUNNING: [new _collision.CollisionBox(22, 0, 17, 16), new _collision.CollisionBox(1, 18, 30, 9), new _collision.CollisionBox(10, 35, 14, 8), new _collision.CollisionBox(1, 24, 29, 5), new _collision.CollisionBox(5, 30, 21, 4), new _collision.CollisionBox(9, 34, 15, 4)]
+    DUCKING: [new _collision.CollisionBox(1, 18, 55, 25)],
+    RUNNING: [new _collision.CollisionBox(22, 0, 17, 16), new _collision.CollisionBox(1, 18, 30, 9), new _collision.CollisionBox(10, 35, 14, 8), new _collision.CollisionBox(1, 24, 29, 5), new _collision.CollisionBox(5, 30, 21, 4), new _collision.CollisionBox(9, 34, 15, 4)]
 };
 
 var status = exports.status = {
-  CRASHED: 'CRASHED',
-  DUCKING: 'DUCKING',
-  JUMPING: 'JUMPING',
-  RUNNING: 'RUNNING',
-  WAITING: 'WAITING'
+    CRASHED: 'CRASHED',
+    DUCKING: 'DUCKING',
+    JUMPING: 'JUMPING',
+    RUNNING: 'RUNNING',
+    WAITING: 'WAITING'
 };
 
 var BLINK_TIMING = exports.BLINK_TIMING = 7000;
 
 var animFrames = exports.animFrames = {
-  WAITING: {
-    frames: [375, 0],
-    msPerFrame: 1000 / 3
-  },
-  RUNNING: {
-    frames: [750, 1125],
-    msPerFrame: 1000 / 12
-  },
-  CRASHED: {
-    frames: [220],
-    msPerFrame: 1000 / 60
-  },
-  JUMPING: {
-    frames: [0],
-    msPerFrame: 1000 / 60
-  },
-  DUCKING: {
-    frames: [2250, 2612],
-    msPerFrame: 1000 / 8
-  }
+    WAITING: {
+        frames: [188, 0],
+        msPerFrame: 1500 / 3
+    },
+    RUNNING: {
+        frames: [376, 564],
+        msPerFrame: 1500 / 12
+    },
+    CRASHED: {
+        frames: [940],
+        msPerFrame: 1500 / 60
+    },
+    JUMPING: {
+        frames: [0],
+        msPerFrame: 1500 / 60
+    },
+    DUCKING: {
+        frames: [1125, 1306],
+        msPerFrame: 1500 / 8
+    }
 };
 
 var spriteIds = exports.spriteIds = {
-  LDPI: {
-    TREX: 'trex-1x'
-  },
-  HDPI: {
-    TREX: 'trex-2x'
-  }
+    LDPI: {
+        TREX: 'trex-1x'
+    },
+    HDPI: {
+        TREX: 'trex-2x'
+    }
 };
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1250,6 +1271,8 @@ var CollisionBox = exports.CollisionBox = function CollisionBox(x, y, w, h) {
   this.height = h;
 };
 
+;
+
 /**
  * Check for a collision.
  * @param {!Obstacle} obstacle
@@ -1258,8 +1281,6 @@ var CollisionBox = exports.CollisionBox = function CollisionBox(x, y, w, h) {
  *    collision boxes.
  * @return {Array<CollisionBox>}
  */
-
-
 function checkForCollision(obstacle, tRex, opt_canvasCtx) {
   var obstacleBoxXPos = _Configs.DIMENSIONS.WIDTH + obstacle.xPos;
 
@@ -1347,7 +1368,7 @@ function boxCompare(tRexBox, obstacleBox) {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1357,11 +1378,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var config = exports.config = {
+  HEIGHT: 21,
+  MAX_CLOUD_GAP: 800,
+  MAX_SKY_LEVEL: 45,
+  MIN_CLOUD_GAP: 150,
+  MIN_SKY_LEVEL: 120,
+  WIDTH: 69
+};
+
+var sourceDimensions = exports.sourceDimensions = {
   HEIGHT: 14,
-  MAX_CLOUD_GAP: 400,
-  MAX_SKY_LEVEL: 30,
-  MIN_CLOUD_GAP: 100,
-  MIN_SKY_LEVEL: 71,
   WIDTH: 46
 };
 
@@ -1375,7 +1401,7 @@ var spriteIds = exports.spriteIds = {
 };
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1384,32 +1410,21 @@ var spriteIds = exports.spriteIds = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.keycodes = exports.sounds = exports.spriteIds = exports.spriteDefinition = exports.events = exports.classes = exports.config = undefined;
+exports.keycodes = exports.sounds = exports.spriteIds = exports.events = exports.classes = exports.config = undefined;
 
 var _consts = __webpack_require__(3);
 
 var config = exports.config = {
   ACCELERATION: 0.001,
-  BG_CLOUD_SPEED: 0.2,
-  BOTTOM_PAD: 10,
   CLEAR_TIME: 3000,
-  CLOUD_FREQUENCY: 0.5,
   GAMEOVER_CLEAR_TIME: 750,
-  GAP_COEFFICIENT: 0.6,
-  GRAVITY: 0.6,
-  INITIAL_JUMP_VELOCITY: 12,
   INVERT_FADE_DURATION: 12000,
   INVERT_DISTANCE: 700,
   MAX_BLINK_COUNT: 3,
-  MAX_CLOUDS: 6,
-  MAX_OBSTACLE_LENGTH: 3,
-  MAX_OBSTACLE_DUPLICATION: 2,
   MAX_SPEED: 13,
-  MIN_JUMP_HEIGHT: 35,
   MOBILE_SPEED_COEFFICIENT: 1.2,
   RESOURCE_TEMPLATE_ID: 'audio-resources',
-  SPEED: 6,
-  SPEED_DROP_COEFFICIENT: 3
+  SPEED: 6
 };
 
 var classes = exports.classes = {
@@ -1439,33 +1454,6 @@ var events = exports.events = {
   LOAD: 'load'
 };
 
-var spriteDefinition = exports.spriteDefinition = {
-  LDPI: {
-    CACTUS_LARGE: { x: 332, y: 2 },
-    CACTUS_SMALL: { x: 228, y: 2 },
-    CLOUD: { x: 86, y: 2 },
-    HORIZON: { x: 2, y: 54 },
-    MOON: { x: 484, y: 2 },
-    PTERODACTYL: { x: 134, y: 2 },
-    RESTART: { x: 2, y: 2 },
-    TEXT_SPRITE: { x: 655, y: 2 },
-    TREX: { x: 848, y: 2 },
-    STAR: { x: 645, y: 2 }
-  },
-  HDPI: {
-    CACTUS_LARGE: { x: 652, y: 2 },
-    CACTUS_SMALL: { x: 446, y: 2 },
-    CLOUD: { x: 166, y: 2 },
-    HORIZON: { x: 2, y: 104 },
-    MOON: { x: 954, y: 2 },
-    PTERODACTYL: { x: 260, y: 2 },
-    RESTART: { x: 2, y: 2 },
-    TEXT_SPRITE: { x: 1294, y: 2 },
-    TREX: { x: 1678, y: 2 },
-    STAR: { x: 1276, y: 2 }
-  }
-};
-
 var spriteIds = exports.spriteIds = {
   LDPI: {
     HORIZON: 'horizonLine-1x',
@@ -1475,7 +1463,10 @@ var spriteIds = exports.spriteIds = {
     CACTUS_SMALL: 'cactusSmall-1x',
     CACTUS_LARGE: 'cactusLarge-1x',
     PTERODACTYL: 'pterodactyl-1x',
-    TREX: 'trex-1x'
+    TREX: 'trex-1x',
+    TEXT_SPRITE: 'text-1x',
+    GAME_OVER: 'gameOver-1x',
+    RESTART: 'restart-1x'
   },
   HDPI: {
     HORIZON: 'horizonLine-2x',
@@ -1485,7 +1476,10 @@ var spriteIds = exports.spriteIds = {
     CACTUS_SMALL: 'cactusSmall-2x',
     CACTUS_LARGE: 'cactusLarge-2x',
     PTERODACTYL: 'pterodactyl-2x',
-    TREX: 'trex-2x'
+    TREX: 'trex-2x',
+    TEXT_SPRITE: 'text-2x',
+    GAME_OVER: 'gameOver-2x',
+    RESTART: 'restart-2x'
   }
 };
 
@@ -1502,7 +1496,7 @@ var keycodes = exports.keycodes = {
   } };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1513,15 +1507,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 var config = exports.config = {
   BG_CLOUD_SPEED: 0.2,
-  BUMPY_THRESHOLD: .3,
   CLOUD_FREQUENCY: .5,
-  HORIZON_HEIGHT: 16,
   MAX_OBSTACLE_DUPLICATION: 2,
-  MAX_CLOUDS: 6
+  MAX_CLOUDS: 3
 };
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1530,44 +1522,58 @@ var config = exports.config = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.spriteIds = exports.types = exports.MAX_OBSTACLE_LENGTH = exports.MAX_GAP_COEFFICIENT = undefined;
+exports.spriteIds = exports.types = exports.MAX_OBSTACLE_LENGTH = exports.GAP_COEFFICIENT = exports.MAX_GAP_COEFFICIENT = undefined;
 
 var _collision = __webpack_require__(2);
 
 var MAX_GAP_COEFFICIENT = exports.MAX_GAP_COEFFICIENT = 1.5;
 
+var GAP_COEFFICIENT = exports.GAP_COEFFICIENT = 0.6;
+
 var MAX_OBSTACLE_LENGTH = exports.MAX_OBSTACLE_LENGTH = 3;
 
 var types = exports.types = [{
   type: 'CACTUS_SMALL',
-  width: 17,
-  height: 35,
-  yPos: 105,
+  width: 28,
+  height: 59,
+  sourceDimensions: {
+    width: 17,
+    height: 35
+  },
+  yPos: 152,
   multipleSpeed: 4,
-  minGap: 120,
+  minGap: 240,
   minSpeed: 0,
   collisionBoxes: [new _collision.CollisionBox(0, 7, 5, 27), new _collision.CollisionBox(4, 0, 6, 34), new _collision.CollisionBox(10, 4, 7, 14)]
 }, {
   type: 'CACTUS_LARGE',
-  width: 25,
-  height: 50,
-  yPos: 90,
+  width: 38,
+  height: 75,
+  sourceDimensions: {
+    width: 25,
+    height: 50
+  },
+  yPos: 135,
   multipleSpeed: 7,
-  minGap: 120,
+  minGap: 240,
   minSpeed: 0,
   collisionBoxes: [new _collision.CollisionBox(0, 12, 7, 38), new _collision.CollisionBox(8, 0, 7, 49), new _collision.CollisionBox(13, 10, 10, 38)]
 }, {
   type: 'PTERODACTYL',
-  width: 46,
-  height: 40,
-  yPos: [100, 75, 50], // Variable height.
+  width: 69,
+  height: 60,
+  sourceDimensions: {
+    width: 46,
+    height: 40
+  },
+  yPos: [150, 90, 65], // Variable height.
   yPosMobile: [100, 50], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
-  minGap: 150,
+  minGap: 300,
   collisionBoxes: [new _collision.CollisionBox(15, 15, 16, 5), new _collision.CollisionBox(18, 21, 24, 6), new _collision.CollisionBox(2, 14, 4, 3), new _collision.CollisionBox(6, 10, 4, 7), new _collision.CollisionBox(10, 8, 6, 9)],
   numFrames: 2,
-  frameRate: 1000 / 6,
+  frameRate: 2000 / 6,
   speedOffset: .8
 }];
 
@@ -1586,7 +1592,7 @@ var spriteIds = exports.spriteIds = {
 };
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1619,7 +1625,7 @@ var spriteIds = exports.spriteIds = {
 var phases = exports.phases = [140, 120, 100, 60, 40, 20, 0];
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1629,9 +1635,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var dimensions = exports.dimensions = {
+  WIDTH: 900,
+  HEIGHT: 18,
+  YPOS: 195
+};
+
+var sourceDimensions = exports.sourceDimensions = {
   WIDTH: 600,
-  HEIGHT: 12,
-  YPOS: 127
+  HEIGHT: 12
 };
 
 var spriteIds = exports.spriteIds = {
@@ -1643,8 +1654,10 @@ var spriteIds = exports.spriteIds = {
   }
 };
 
+var BUMP_THRESHOLD = exports.BUMP_THRESHOLD = .5;
+
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1687,8 +1700,17 @@ var config = exports.config = {
   FLASH_ITERATIONS: 3
 };
 
+var spriteIds = exports.spriteIds = {
+  LDPI: {
+    TEXT_SPRITE: 'text-1x'
+  },
+  HDPI: {
+    TEXT_SPRITE: 'text-2x'
+  }
+};
+
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1699,15 +1721,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 var dimensions = exports.dimensions = {
   TEXT_X: 0,
-  TEXT_Y: 13,
+  TEXT_Y: 0,
   TEXT_WIDTH: 191,
   TEXT_HEIGHT: 11,
   RESTART_WIDTH: 36,
   RESTART_HEIGHT: 32
 };
 
+var spriteIds = exports.spriteIds = {
+  LDPI: {
+    GAME_OVER: 'gameOver-1x',
+    RESTART: 'restart-1x'
+  },
+  HDPI: {
+    GAME_OVER: 'gameOver-2x',
+    RESTART: 'restart-2x'
+  }
+};
+
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1717,7 +1750,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _horizon = __webpack_require__(18);
+var _horizon = __webpack_require__(20);
 
 var _horizon2 = _interopRequireDefault(_horizon);
 
@@ -1726,7 +1759,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _horizon2.default;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1740,19 +1773,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _Configs = __webpack_require__(0);
 
-var _horizonLine = __webpack_require__(19);
+var _horizonLine = __webpack_require__(21);
 
 var _horizonLine2 = _interopRequireDefault(_horizonLine);
 
-var _nightMode = __webpack_require__(20);
+var _nightMode = __webpack_require__(22);
 
 var _nightMode2 = _interopRequireDefault(_nightMode);
 
-var _cloud = __webpack_require__(22);
+var _cloud = __webpack_require__(4);
 
 var _cloud2 = _interopRequireDefault(_cloud);
 
-var _obstacle = __webpack_require__(24);
+var _obstacle = __webpack_require__(5);
 
 var _obstacle2 = _interopRequireDefault(_obstacle);
 
@@ -1772,7 +1805,6 @@ var Horizon = function () {
     this.obstacles = [];
     this.obstacleHistory = [];
     this.dimensions = _Configs.DIMENSIONS;
-    this.horizonOffsets = [0, 0];
     this.cloudFrequency = this.config.CLOUD_FREQUENCY;
     this.nightMode = null;
 
@@ -1972,12 +2004,14 @@ var Horizon = function () {
   return Horizon;
 }();
 
+;
+
 Horizon = Object.assign(Horizon, _Configs.horizonConfig);
 
 exports.default = Horizon;
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1998,15 +2032,15 @@ var HorizonLine = function () {
     _classCallCheck(this, HorizonLine);
 
     this.spritePos = { x: 0, y: 0 };
+    this.sourceDimensions = HorizonLine.sourceDimensions;
     this.sprite = null;
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
-    this.sourceDimensions = {};
     this.dimensions = HorizonLine.dimensions;
-    this.sourceXPos = [this.spritePos.x, this.spritePos.x + this.dimensions.WIDTH];
+    this.sourceXPos = [this.spritePos.x, this.spritePos.x + this.sourceDimensions.WIDTH];
     this.xPos = [];
     this.yPos = 0;
-    this.bumpThreshold = 0.5;
+    this.bumpThreshold = HorizonLine.BUMP_THRESHOLD;
 
     this.setSourceDimensions();
     this.setSprite();
@@ -2022,15 +2056,15 @@ var HorizonLine = function () {
     key: 'setSourceDimensions',
     value: function setSourceDimensions() {
 
-      for (var dimension in HorizonLine.dimensions) {
+      for (var dimension in HorizonLine.sourceDimensions) {
         if (_Configs.IS_HIDPI) {
           if (dimension != 'YPOS') {
-            this.sourceDimensions[dimension] = HorizonLine.dimensions[dimension] * 2;
-            console.log(this.sourceDimensions);
+            this.sourceDimensions[dimension] = HorizonLine.sourceDimensions[dimension] * 2;
           }
         } else {
-          this.sourceDimensions[dimension] = HorizonLine.dimensions[dimension];
+          this.sourceDimensions[dimension] = HorizonLine.sourceDimensions[dimension];
         }
+
         this.dimensions[dimension] = HorizonLine.dimensions[dimension];
       }
 
@@ -2054,7 +2088,7 @@ var HorizonLine = function () {
   }, {
     key: 'getRandomType',
     value: function getRandomType() {
-      return Math.random() > this.bumpThreshold ? this.dimensions.WIDTH : 0;
+      return Math.random() > this.bumpThreshold ? this.sourceDimensions.WIDTH : 0;
     }
 
     /**
@@ -2080,7 +2114,6 @@ var HorizonLine = function () {
     value: function updateXPos(pos, increment) {
       var line1 = pos;
       var line2 = pos == 0 ? 1 : 0;
-
       this.xPos[line1] -= increment;
       this.xPos[line2] = this.xPos[line1] + this.dimensions.WIDTH;
 
@@ -2125,12 +2158,14 @@ var HorizonLine = function () {
   return HorizonLine;
 }();
 
+;
+
 HorizonLine = Object.assign(HorizonLine, _Configs.horizonLineConfig);
 
 exports.default = HorizonLine;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2140,7 +2175,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _nightMode = __webpack_require__(21);
+var _nightMode = __webpack_require__(23);
 
 var _nightMode2 = _interopRequireDefault(_nightMode);
 
@@ -2149,7 +2184,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _nightMode2.default;
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2182,6 +2217,7 @@ var NightMode = function () {
     this.containerWidth = _Configs.DIMENSIONS.WIDTH;
     this.stars = [];
     this.drawStars = false;
+
     this.setSprite();
     this.placeStars();
   }
@@ -2272,7 +2308,6 @@ var NightMode = function () {
       }
 
       // Moon.
-      console.log(_Configs.IS_HIDPI, moonSourceWidth, moonSourceHeight, moonOutputWidth, NightMode.config.HEIGHT);
       this.canvasCtx.drawImage(this.moonSprite, moonSourceX, this.moonSpritePos.y, moonSourceWidth, moonSourceHeight, Math.round(this.xPos), this.yPos, moonOutputWidth, NightMode.config.HEIGHT);
 
       this.canvasCtx.globalAlpha = 1;
@@ -2310,31 +2345,14 @@ var NightMode = function () {
   return NightMode;
 }();
 
+;
+
 NightMode = Object.assign(NightMode, _Configs.nightModeConfig);
 
 exports.default = NightMode;
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _cloud = __webpack_require__(23);
-
-var _cloud2 = _interopRequireDefault(_cloud);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _cloud2.default;
-
-/***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2363,23 +2381,15 @@ var Cloud = function () {
     this.xPos = _Configs.DIMENSIONS.WIDTH;
     this.yPos = 0;
     this.remove = false;
-    this.cloudGap = (0, _service.getRandomNum)(Cloud.config.MIN_CLOUD_GAP, Cloud.config.MAX_CLOUD_GAP);
 
-    this.setSprite();
+    this.sourceDimensions = Cloud.sourceDimensions;
+
+    this.sprite = Cloud.CLOUD_SPRITE;
+
     this.init();
   }
 
   _createClass(Cloud, [{
-    key: 'setSprite',
-    value: function setSprite() {
-      if (_Configs.IS_HIDPI) {
-        this.sprite = document.getElementById(Cloud.spriteIds.HDPI.CLOUD);
-        console.log(this.sprite);
-      } else {
-        this.sprite = document.getElementById(Cloud.spriteIds.LDPI.CLOUD);
-      }
-    }
-  }, {
     key: 'init',
     value: function init() {
       this.yPos = (0, _service.getRandomNum)(Cloud.config.MAX_SKY_LEVEL, Cloud.config.MIN_SKY_LEVEL);
@@ -2394,8 +2404,9 @@ var Cloud = function () {
     key: 'draw',
     value: function draw() {
       this.canvasCtx.save();
-      var sourceWidth = Cloud.config.WIDTH;
-      var sourceHeight = Cloud.config.HEIGHT;
+
+      var sourceWidth = this.sourceDimensions.WIDTH;
+      var sourceHeight = this.sourceDimensions.HEIGHT;
 
       if (_Configs.IS_HIDPI) {
         sourceWidth = sourceWidth * 2;
@@ -2441,28 +2452,19 @@ var Cloud = function () {
   return Cloud;
 }();
 
+;
+
 Cloud = Object.assign(Cloud, _Configs.cloudConfig);
 
+Cloud.initSprites = function () {
+  if (_Configs.IS_HIDPI) {
+    Cloud.CLOUD_SPRITE = document.getElementById(Cloud.spriteIds.HDPI.CLOUD);
+  } else {
+    Cloud.CLOUD_SPRITE = document.getElementById(Cloud.spriteIds.LDPI.CLOUD);
+  }
+};
+
 exports.default = Cloud;
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _obstacle = __webpack_require__(25);
-
-var _obstacle2 = _interopRequireDefault(_obstacle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _obstacle2.default;
 
 /***/ }),
 /* 25 */
@@ -2492,7 +2494,7 @@ var Obstacle = function () {
     this.canvasCtx = canvasCtx;
     this.spritePos = { x: 0, y: 0 };
     this.typeConfig = type;
-    this.gapCoefficient = _Configs.runnerConfig.GAP_COEFFICIENT;
+    this.gapCoefficient = Obstacle.GAP_COEFFICIENT;
     this.size = (0, _service.getRandomNum)(1, Obstacle.MAX_OBSTACLE_LENGTH);
     this.dimensions = _Configs.DIMENSIONS;
     this.remove = false;
@@ -2506,6 +2508,7 @@ var Obstacle = function () {
     // For animated obstacles.
     this.currentFrame = 0;
     this.timer = 0;
+
     this.setSprite(type);
     this.init(speed);
   }
@@ -2515,11 +2518,7 @@ var Obstacle = function () {
     value: function setSprite(_ref) {
       var type = _ref.type;
 
-      if (_Configs.IS_HIDPI) {
-        this.sprite = document.getElementById(Obstacle.spriteIds.HDPI[type]);
-      } else {
-        this.sprite = document.getElementById(Obstacle.spriteIds.LDPI[type]);
-      }
+      this.sprite = Obstacle[type + '_SPRITE'];
     }
   }, {
     key: 'init',
@@ -2571,8 +2570,8 @@ var Obstacle = function () {
   }, {
     key: 'draw',
     value: function draw() {
-      var sourceWidth = this.typeConfig.width;
-      var sourceHeight = this.typeConfig.height;
+      var sourceWidth = this.typeConfig.sourceDimensions.width;
+      var sourceHeight = this.typeConfig.sourceDimensions.height;
 
       if (_Configs.IS_HIDPI) {
         sourceWidth = sourceWidth * 2;
@@ -2667,7 +2666,41 @@ var Obstacle = function () {
   return Obstacle;
 }();
 
+;
+
 Obstacle = Object.assign(Obstacle, _Configs.obstacleConfig);
+
+Obstacle.initSprites = function () {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = Obstacle.types[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _ref2 = _step.value;
+      var type = _ref2.type;
+
+      if (_Configs.IS_HIDPI) {
+        Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.HDPI[type]);
+      } else {
+        Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.LDPI[type]);
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+};
 
 exports.default = Obstacle;
 
@@ -2726,8 +2759,9 @@ var Trex = function () {
     this.blinkCount = 0;
     this.animStartTime = 0;
     this.timer = 0;
-    this.msPerFrame = 1000 / _Configs.FPS;
+    this.msPerFrame = 2000 / _Configs.FPS;
     this.config = Trex.config;
+    this.sourceDimensions = Trex.sourceDimensions;
     // Current status.
     this.status = Trex.status.WAITING;
 
@@ -2755,7 +2789,7 @@ var Trex = function () {
   }, {
     key: 'init',
     value: function init() {
-      this.groundYPos = _Configs.DIMENSIONS.HEIGHT - this.config.HEIGHT - _Configs.runnerConfig.config.BOTTOM_PAD;
+      this.groundYPos = _Configs.DIMENSIONS.HEIGHT - this.config.HEIGHT - this.config.BOTTOM_PAD;
       this.yPos = this.groundYPos;
       this.minJumpHeight = this.groundYPos - this.config.MIN_JUMP_HEIGHT;
 
@@ -2834,12 +2868,9 @@ var Trex = function () {
     value: function draw(x, y) {
       var sourceX = x;
       var sourceY = y;
-      // var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ?
-      //   this.config.WIDTH_DUCK : this.config.WIDTH;
-      // var sourceHeight = this.config.HEIGHT;
 
-      var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ? this.config.SOURCE_WIDTH_DUCK : this.config.SOURCE_WIDTH;
-      var sourceHeight = this.config.SOURCE_HEIGHT;
+      var sourceWidth = this.ducking && this.status != Trex.status.CRASHED ? this.sourceDimensions.WIDTH_DUCK : this.sourceDimensions.WIDTH;
+      var sourceHeight = this.sourceDimensions.HEIGHT;
 
       if (_Configs.IS_HIDPI) {
         sourceX *= 2;
@@ -3056,40 +3087,49 @@ var _Configs = __webpack_require__(0);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var DistanceMeter = function () {
-  function DistanceMeter(canvas, spritePos, canvasWidth) {
+  function DistanceMeter(canvas) {
     _classCallCheck(this, DistanceMeter);
 
     this.canvas = canvas;
     this.canvasCtx = canvas.getContext('2d');
-    // this.image = Runner.imageSprite;
-    this.spritePos = spritePos;
+    this.spritePos = { x: 0, y: 0 };
     this.x = 0;
     this.y = 5;
 
-    this.currentDistance = 0;
     this.maxScore = 0;
     this.highScore = 0;
-    this.container = null;
 
     this.digits = [];
     this.acheivement = false;
     this.defaultString = '';
     this.flashTimer = 0;
     this.flashIterations = 0;
-    this.invertTrigger = false;
 
     this.config = DistanceMeter.config;
     this.maxScoreUnits = this.config.MAX_DISTANCE_UNITS;
-    this.init(canvasWidth);
+
+    this.setSprite();
+
+    this.init(_Configs.DIMENSIONS.WIDTH);
   }
 
   _createClass(DistanceMeter, [{
+    key: 'setSprite',
+    value: function setSprite() {
+      if (_Configs.IS_HIDPI) {
+        this.sprite = document.getElementById(DistanceMeter.spriteIds.HDPI.TEXT_SPRITE);
+      } else {
+        this.sprite = document.getElementById(DistanceMeter.spriteIds.LDPI.TEXT_SPRITE);
+      }
+    }
+  }, {
     key: 'init',
     value: function init(width) {
       var maxDistanceStr = '';
 
       this.calcXPos(width);
       this.maxScore = this.maxScoreUnits;
+
       for (var i = 0; i < this.maxScoreUnits; i++) {
         this.draw(i, 0);
         this.defaultString += '0';
@@ -3119,46 +3159,41 @@ var DistanceMeter = function () {
 
   }, {
     key: 'draw',
-    value: function draw(digitPos, value, opt_highScore) {}
-    // var sourceWidth = DistanceMeter.dimensions.WIDTH;
-    // var sourceHeight = DistanceMeter.dimensions.HEIGHT;
-    // var sourceX = DistanceMeter.dimensions.WIDTH * value;
-    // var sourceY = 0;
+    value: function draw(digitPos, value, opt_highScore) {
+      var sourceWidth = DistanceMeter.dimensions.WIDTH;
+      var sourceHeight = DistanceMeter.dimensions.HEIGHT;
+      var sourceX = DistanceMeter.dimensions.WIDTH * value;
+      var sourceY = 0;
 
-    // var targetX = digitPos * DistanceMeter.dimensions.DEST_WIDTH;
-    // var targetY = this.y;
-    // var targetWidth = DistanceMeter.dimensions.WIDTH;
-    // var targetHeight = DistanceMeter.dimensions.HEIGHT;
+      var targetX = digitPos * DistanceMeter.dimensions.DEST_WIDTH;
+      var targetY = this.y;
+      var targetWidth = DistanceMeter.dimensions.WIDTH;
+      var targetHeight = DistanceMeter.dimensions.HEIGHT;
 
-    // // For high DPI we 2x source values.
-    // if (IS_HIDPI) {
-    //   sourceWidth *= 2;
-    //   sourceHeight *= 2;
-    //   sourceX *= 2;
-    // }
+      // For high DPI we 2x source values.
+      if (_Configs.IS_HIDPI) {
+        sourceWidth *= 2;
+        sourceHeight *= 2;
+        sourceX *= 2;
+      }
 
-    // sourceX += this.spritePos.x;
-    // sourceY += this.spritePos.y;
+      sourceX += this.spritePos.x;
+      sourceY += this.spritePos.y;
 
-    // this.canvasCtx.save();
+      this.canvasCtx.save();
 
-    // if (opt_highScore) {
-    //   // Left of the current score.
-    //   var highScoreX = this.x - (this.maxScoreUnits * 2) *
-    //     DistanceMeter.dimensions.WIDTH;
-    //   this.canvasCtx.translate(highScoreX, this.y);
-    // } else {
-    //   this.canvasCtx.translate(this.x, this.y);
-    // }
+      if (opt_highScore) {
+        // Left of the current score.
+        var highScoreX = this.x - this.maxScoreUnits * 2 * DistanceMeter.dimensions.WIDTH;
+        this.canvasCtx.translate(highScoreX, this.y);
+      } else {
+        this.canvasCtx.translate(this.x, this.y);
+      }
 
-    // this.canvasCtx.drawImage(this.image, sourceX, sourceY,
-    //   sourceWidth, sourceHeight,
-    //   targetX, targetY,
-    //   targetWidth, targetHeight
-    // );
+      this.canvasCtx.drawImage(this.sprite, sourceX, sourceY, sourceWidth, sourceHeight, targetX, targetY, targetWidth, targetHeight);
 
-    // this.canvasCtx.restore();
-
+      this.canvasCtx.restore();
+    }
 
     /**
      * Covert pixel distance to a 'real' distance.
@@ -3245,14 +3280,14 @@ var DistanceMeter = function () {
 
   }, {
     key: 'drawHighScore',
-    value: function drawHighScore() {}
-    // this.canvasCtx.save();
-    // this.canvasCtx.globalAlpha = .8;
-    // for (var i = this.highScore.length - 1; i >= 0; i--) {
-    //   this.draw(i, parseInt(this.highScore[i], 10), true);
-    // }
-    // this.canvasCtx.restore();
-
+    value: function drawHighScore() {
+      this.canvasCtx.save();
+      this.canvasCtx.globalAlpha = .8;
+      for (var i = this.highScore.length - 1; i >= 0; i--) {
+        this.draw(i, parseInt(this.highScore[i], 10), true);
+      }
+      this.canvasCtx.restore();
+    }
 
     /**
      * Set the highscore as a array string.
@@ -3284,12 +3319,141 @@ var DistanceMeter = function () {
   return DistanceMeter;
 }();
 
+;
+
 DistanceMeter = Object.assign(DistanceMeter, _Configs.distanceMeterConfig);
 
 exports.default = DistanceMeter;
 
 /***/ }),
 /* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _gameOverPanel = __webpack_require__(31);
+
+var _gameOverPanel2 = _interopRequireDefault(_gameOverPanel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _gameOverPanel2.default;
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Configs = __webpack_require__(0);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var GameOverPanel = function () {
+  function GameOverPanel(canvas) {
+    _classCallCheck(this, GameOverPanel);
+
+    this.canvas = canvas;
+    this.canvasCtx = canvas.getContext('2d');
+    this.canvasDimensions = _Configs.DIMENSIONS;
+    this.textImgPos = { x: 0, y: 0 };
+    this.restartImgPos = { x: 0, y: 0 };
+
+    this.setSprites();
+
+    this.draw();
+  }
+
+  _createClass(GameOverPanel, [{
+    key: 'setSprites',
+    value: function setSprites() {
+      if (_Configs.IS_HIDPI) {
+        this.textSprite = document.getElementById(GameOverPanel.spriteIds.HDPI.GAME_OVER);
+        this.restartSprite = document.getElementById(GameOverPanel.spriteIds.HDPI.RESTART);
+      } else {
+        this.textSprite = document.getElementById(GameOverPanel.spriteIds.LDPI.GAME_OVER);
+        this.restartSprite = document.getElementById(GameOverPanel.spriteIds.LDPI.RESTART);
+      }
+    }
+  }, {
+    key: 'updateDimensions',
+    value: function updateDimensions(width, opt_height) {
+      this.canvasDimensions.WIDTH = width;
+      if (opt_height) {
+        this.canvasDimensions.HEIGHT = opt_height;
+      }
+    }
+
+    /**
+     * Draw the panel.
+     */
+
+  }, {
+    key: 'draw',
+    value: function draw() {
+      var dimensions = GameOverPanel.dimensions;
+
+      var centerX = this.canvasDimensions.WIDTH / 2;
+
+      // Game over text.
+      var textSourceX = dimensions.TEXT_X;
+      var textSourceY = dimensions.TEXT_Y;
+      var textSourceWidth = dimensions.TEXT_WIDTH;
+      var textSourceHeight = dimensions.TEXT_HEIGHT;
+
+      var textTargetX = Math.round(centerX - dimensions.TEXT_WIDTH / 2);
+      var textTargetY = Math.round((this.canvasDimensions.HEIGHT - 25) / 3);
+      var textTargetWidth = dimensions.TEXT_WIDTH;
+      var textTargetHeight = dimensions.TEXT_HEIGHT;
+
+      var restartSourceWidth = dimensions.RESTART_WIDTH;
+      var restartSourceHeight = dimensions.RESTART_HEIGHT;
+      var restartTargetX = centerX - dimensions.RESTART_WIDTH / 2;
+      var restartTargetY = this.canvasDimensions.HEIGHT / 2;
+
+      if (_Configs.IS_HIDPI) {
+        textSourceY *= 2;
+        textSourceX *= 2;
+        textSourceWidth *= 2;
+        textSourceHeight *= 2;
+        restartSourceWidth *= 2;
+        restartSourceHeight *= 2;
+      }
+
+      textSourceX += this.textImgPos.x;
+      textSourceY += this.textImgPos.y;
+
+      // Game over text from sprite.
+      this.canvasCtx.drawImage(this.textSprite, textSourceX, textSourceY, textSourceWidth, textSourceHeight, textTargetX, textTargetY, textTargetWidth, textTargetHeight);
+
+      // Restart button.
+      this.canvasCtx.drawImage(this.restartSprite, this.restartImgPos.x, this.restartImgPos.y, restartSourceWidth, restartSourceHeight, restartTargetX, restartTargetY, dimensions.RESTART_WIDTH, dimensions.RESTART_HEIGHT);
+    }
+  }]);
+
+  return GameOverPanel;
+}();
+
+;
+
+GameOverPanel = Object.assign(GameOverPanel, _Configs.gameOverPanelConfig);
+
+exports.default = GameOverPanel;
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3374,6 +3538,8 @@ var ImagesLoader = function () {
 
   return ImagesLoader;
 }();
+
+;
 
 exports.default = ImagesLoader;
 
