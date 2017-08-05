@@ -4,7 +4,7 @@
  */
 export const DEFAULT_WIDTH = 900;
 
-export const DEFAULT_HEIGHT = 225;
+export const DEFAULT_HEIGHT = 270;
 
 export const DIMENSIONS = {
   WIDTH: DEFAULT_WIDTH,

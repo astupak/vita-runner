@@ -5,7 +5,7 @@ export const config = {
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
-  STAR_MAX_Y: 70,
+  STAR_MAX_Y: 100,
   WIDTH: 20
 };
 

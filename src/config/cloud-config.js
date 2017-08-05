@@ -1,9 +1,9 @@
 export const config = {
   HEIGHT: 21,
   MAX_CLOUD_GAP: 800,
-  MAX_SKY_LEVEL: 45,
+  MAX_SKY_LEVEL: 54,
   MIN_CLOUD_GAP: 150,
-  MIN_SKY_LEVEL: 120,
+  MIN_SKY_LEVEL: 150,
   WIDTH: 69
 };
 

@@ -1,7 +1,7 @@
 export const dimensions = {
   WIDTH: 900,
-  HEIGHT: 18,
-  YPOS: 195
+  HEIGHT: 23,
+  YPOS: 234
 };
 
 export const sourceDimensions = {

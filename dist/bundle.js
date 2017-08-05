@@ -249,7 +249,7 @@ Object.defineProperty(exports, "__esModule", {
  */
 var DEFAULT_WIDTH = exports.DEFAULT_WIDTH = 900;
 
-var DEFAULT_HEIGHT = exports.DEFAULT_HEIGHT = 225;
+var DEFAULT_HEIGHT = exports.DEFAULT_HEIGHT = 270;
 
 var DIMENSIONS = exports.DIMENSIONS = {
   WIDTH: DEFAULT_WIDTH,
@@ -768,7 +768,7 @@ var Runner = function () {
           this.horizon.update(0, this.currentSpeed, hasObstacles);
         } else {
           deltaTime = !this.activated ? 0 : deltaTime;
-          this.horizon.update(deltaTime, this.currentSpeed, hasObstacles, this.inverted);
+          this.horizon.update(deltaTime, this.currentSpeed, hasObstacles, this.inverted || true);
         }
 
         // Check for collisions.
@@ -1174,30 +1174,30 @@ var _collision = __webpack_require__(2);
 
 var config = exports.config = {
     BOTTOM_PAD: 10,
-    DROP_VELOCITY: -8,
-    GRAVITY: 0.6,
-    HEIGHT: 95,
-    HEIGHT_DUCK: 70,
-    INIITAL_JUMP_VELOCITY: -13,
+    DROP_VELOCITY: -11,
+    GRAVITY: 1.0,
+    HEIGHT: 132,
+    HEIGHT_DUCK: 90,
+    INIITAL_JUMP_VELOCITY: -16,
     INTRO_DURATION: 1200,
-    MAX_JUMP_HEIGHT: 60,
-    MIN_JUMP_HEIGHT: 60,
+    MAX_JUMP_HEIGHT: 120,
+    MIN_JUMP_HEIGHT: 80,
     SPEED_DROP_COEFFICIENT: 3,
     START_X_POS: 50,
-    WIDTH: 60,
-    WIDTH_DUCK: 60
+    WIDTH: 70,
+    WIDTH_DUCK: 70
 };
 
 var sourceDimensions = exports.sourceDimensions = {
-    WIDTH: 188,
+    WIDTH: 187,
     HEIGHT: 354,
     WIDTH_DUCK: 181,
     HEIGHT_DUCK: 254
 };
 
 var collisionBoxes = exports.collisionBoxes = {
-    DUCKING: [new _collision.CollisionBox(1, 18, 55, 25)],
-    RUNNING: [new _collision.CollisionBox(22, 0, 17, 16), new _collision.CollisionBox(1, 18, 30, 9), new _collision.CollisionBox(10, 35, 14, 8), new _collision.CollisionBox(1, 24, 29, 5), new _collision.CollisionBox(5, 30, 21, 4), new _collision.CollisionBox(9, 34, 15, 4)]
+    DUCKING: [new _collision.CollisionBox(23, 42, 24, 4), new _collision.CollisionBox(6, 46, 63, 19), new _collision.CollisionBox(3, 65, 62, 67)],
+    RUNNING: [new _collision.CollisionBox(19, 0, 26, 11), new _collision.CollisionBox(5, 11, 54, 13), new _collision.CollisionBox(1, 24, 64, 17), new _collision.CollisionBox(0, 41, 55, 42), new _collision.CollisionBox(55, 41, 15, 8), new _collision.CollisionBox(3, 83, 19, 40), new _collision.CollisionBox(42, 83, 17, 49)]
 };
 
 var status = exports.status = {
@@ -1380,9 +1380,9 @@ Object.defineProperty(exports, "__esModule", {
 var config = exports.config = {
   HEIGHT: 21,
   MAX_CLOUD_GAP: 800,
-  MAX_SKY_LEVEL: 45,
+  MAX_SKY_LEVEL: 54,
   MIN_CLOUD_GAP: 150,
-  MIN_SKY_LEVEL: 120,
+  MIN_SKY_LEVEL: 150,
   WIDTH: 69
 };
 
@@ -1526,52 +1526,63 @@ exports.spriteIds = exports.types = exports.MAX_OBSTACLE_LENGTH = exports.GAP_CO
 
 var _collision = __webpack_require__(2);
 
-var MAX_GAP_COEFFICIENT = exports.MAX_GAP_COEFFICIENT = 1.5;
+var MAX_GAP_COEFFICIENT = exports.MAX_GAP_COEFFICIENT = 1.0;
 
-var GAP_COEFFICIENT = exports.GAP_COEFFICIENT = 0.6;
+var GAP_COEFFICIENT = exports.GAP_COEFFICIENT = 0.5;
 
 var MAX_OBSTACLE_LENGTH = exports.MAX_OBSTACLE_LENGTH = 3;
 
 var types = exports.types = [{
   type: 'CACTUS_SMALL',
-  width: 28,
-  height: 59,
+  width: 42,
+  height: 80,
   sourceDimensions: {
     width: 17,
     height: 35
   },
-  yPos: 152,
+  yPos: 178,
   multipleSpeed: 4,
   minGap: 240,
   minSpeed: 0,
-  collisionBoxes: [new _collision.CollisionBox(0, 7, 5, 27), new _collision.CollisionBox(4, 0, 6, 34), new _collision.CollisionBox(10, 4, 7, 14)]
+  collisionBoxes: {
+    '1': [new _collision.CollisionBox(0, 0, 42, 80)],
+    '2': [new _collision.CollisionBox(4, 1, 41, 75), new _collision.CollisionBox(45, 13, 35, 63)],
+    '3': [new _collision.CollisionBox(0, 4, 43, 72), new _collision.CollisionBox(43, 26, 77, 50)]
+  }
 }, {
   type: 'CACTUS_LARGE',
-  width: 38,
-  height: 75,
+  width: 44,
+  height: 92,
   sourceDimensions: {
     width: 25,
     height: 50
   },
-  yPos: 135,
+  yPos: 162,
   multipleSpeed: 7,
   minGap: 240,
   minSpeed: 0,
-  collisionBoxes: [new _collision.CollisionBox(0, 12, 7, 38), new _collision.CollisionBox(8, 0, 7, 49), new _collision.CollisionBox(13, 10, 10, 38)]
+  collisionBoxes: {
+    '1': [new _collision.CollisionBox(0, 0, 44, 92)],
+    '2': [new _collision.CollisionBox(0, 0, 88, 92)],
+    '3': [new _collision.CollisionBox(0, 0, 132, 92)]
+  }
 }, {
   type: 'PTERODACTYL',
-  width: 69,
-  height: 60,
+  width: 84,
+  height: 72,
   sourceDimensions: {
     width: 46,
     height: 40
   },
-  yPos: [150, 90, 65], // Variable height.
+  yPos: [200, 100, 75], // Variable height.
   yPosMobile: [100, 50], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
   minGap: 300,
-  collisionBoxes: [new _collision.CollisionBox(15, 15, 16, 5), new _collision.CollisionBox(18, 21, 24, 6), new _collision.CollisionBox(2, 14, 4, 3), new _collision.CollisionBox(6, 10, 4, 7), new _collision.CollisionBox(10, 8, 6, 9)],
+  collisionBoxes: {
+    '1': [new _collision.CollisionBox(0, 25, 84, 11)]
+  },
+
   numFrames: 2,
   frameRate: 2000 / 6,
   speedOffset: .8
@@ -1608,7 +1619,7 @@ var config = exports.config = {
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
-  STAR_MAX_Y: 70,
+  STAR_MAX_Y: 100,
   WIDTH: 20
 };
 
@@ -1636,8 +1647,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 var dimensions = exports.dimensions = {
   WIDTH: 900,
-  HEIGHT: 18,
-  YPOS: 195
+  HEIGHT: 23,
+  YPOS: 234
 };
 
 var sourceDimensions = exports.sourceDimensions = {
@@ -2523,12 +2534,12 @@ var Obstacle = function () {
   }, {
     key: 'init',
     value: function init(speed) {
-      this.cloneCollisionBoxes();
-
       // Only allow sizing if we're at the right speed.
       if (this.size > 1 && this.typeConfig.multipleSpeed > speed) {
         this.size = 1;
       }
+
+      this.collisionBoxes = this.typeConfig.collisionBoxes[this.size];
 
       this.width = this.typeConfig.width * this.size;
 
@@ -2541,19 +2552,6 @@ var Obstacle = function () {
       }
 
       this.draw();
-
-      // Make collision box adjustments,
-      // Central box is adjusted to the size as one box.
-      //      ____        ______        ________
-      //    _|   |-|    _|     |-|    _|       |-|
-      //   | |<->| |   | |<--->| |   | |<----->| |
-      //   | | 1 | |   | |  2  | |   | |   3   | |
-      //   |_|___|_|   |_|_____|_|   |_|_______|_|
-      //
-      if (this.size > 1) {
-        this.collisionBoxes[1].width = this.width - this.collisionBoxes[0].width - this.collisionBoxes[2].width;
-        this.collisionBoxes[2].x = this.width - this.collisionBoxes[2].width;
-      }
 
       // For obstacles that go at a different speed from the horizon.
       if (this.typeConfig.speedOffset) {
@@ -2645,21 +2643,6 @@ var Obstacle = function () {
     key: 'isVisible',
     value: function isVisible() {
       return this.xPos + this.width > 0;
-    }
-
-    /**
-     * Make a copy of the collision boxes, since these will change based on
-     * obstacle type and size.
-     */
-
-  }, {
-    key: 'cloneCollisionBoxes',
-    value: function cloneCollisionBoxes() {
-      var collisionBoxes = this.typeConfig.collisionBoxes;
-
-      for (var i = collisionBoxes.length - 1; i >= 0; i--) {
-        this.collisionBoxes[i] = new _collision.CollisionBox(collisionBoxes[i].x, collisionBoxes[i].y, collisionBoxes[i].width, collisionBoxes[i].height);
-      }
     }
   }]);
 

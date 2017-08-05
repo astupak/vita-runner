@@ -1,69 +1,74 @@
 import { CollisionBox } from '../collision';
 
-export const MAX_GAP_COEFFICIENT = 1.5;
+export const MAX_GAP_COEFFICIENT = 1.0;
 
-export const GAP_COEFFICIENT = 0.6;
+export const GAP_COEFFICIENT = 0.5;
 
 export const MAX_OBSTACLE_LENGTH = 3;
 
 export const types = [{
   type: 'CACTUS_SMALL',
-  width: 28,
-  height: 59,
+  width: 42,
+  height: 80,
   sourceDimensions: {
     width: 17,
     height: 35,
   },
-  yPos: 152,
+  yPos: 178,
   multipleSpeed: 4,
   minGap: 240,
   minSpeed: 0,
-  collisionBoxes: [
-    new CollisionBox(0, 7, 5, 27),
-    new CollisionBox(4, 0, 6, 34),
-    new CollisionBox(10, 4, 7, 14)
-  ]
-}, {
+  collisionBoxes: {
+    '1': [ new CollisionBox(0, 0, 42, 80) ],
+    '2': [ 
+      new CollisionBox(4, 1, 41, 75),
+      new CollisionBox(45, 13, 35, 63),
+    ],
+    '3': [ 
+      new CollisionBox(0, 4, 43, 72),
+      new CollisionBox(43, 26, 77, 50),
+     ]
+  }
+}, 
+{
   type: 'CACTUS_LARGE',
-  width: 38,
-  height: 75,
+  width: 44,
+  height: 92,
   sourceDimensions: {
     width: 25,
     height: 50,
   },
-  yPos: 135,
+  yPos: 162,
   multipleSpeed: 7,
   minGap: 240,
   minSpeed: 0,
-  collisionBoxes: [
-    new CollisionBox(0, 12, 7, 38),
-    new CollisionBox(8, 0, 7, 49),
-    new CollisionBox(13, 10, 10, 38)
-  ]
+  collisionBoxes: {
+    '1': [ new CollisionBox(0, 0, 44, 92) ],
+    '2': [ new CollisionBox(0, 0, 88, 92) ],
+    '3': [ new CollisionBox(0, 0, 132, 92) ]
+  }
 }, {
   type: 'PTERODACTYL',
-  width: 69,
-  height: 60,
+  width: 84,
+  height: 72,
   sourceDimensions: {
     width: 46,
     height: 40,
   },
-  yPos: [150, 90, 65], // Variable height.
+  yPos: [200, 100, 75], // Variable height.
   yPosMobile: [100, 50], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
   minGap: 300,
-  collisionBoxes: [
-    new CollisionBox(15, 15, 16, 5),
-    new CollisionBox(18, 21, 24, 6),
-    new CollisionBox(2, 14, 4, 3),
-    new CollisionBox(6, 10, 4, 7),
-    new CollisionBox(10, 8, 6, 9)
-  ],
+  collisionBoxes: {
+    '1': [  new CollisionBox(0, 25, 84, 11) ]
+  }
+  ,
   numFrames: 2,
   frameRate: 2000 / 6,
   speedOffset: .8
-}];
+}
+];
 
 export const spriteIds = {
   LDPI: {

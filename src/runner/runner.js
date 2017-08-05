@@ -367,7 +367,7 @@ class Runner {
       } else {
         deltaTime = !this.activated ? 0 : deltaTime;
         this.horizon.update(deltaTime, this.currentSpeed, hasObstacles,
-          this.inverted);
+          this.inverted || true);
       }
 
       // Check for collisions.
