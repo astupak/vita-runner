@@ -2714,8 +2714,8 @@ Obstacle.initSprites = function () {
 
   try {
     for (var _iterator = Obstacle.types[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _ref2 = _step.value;
-      var type = _ref2.type;
+      var _ref3 = _step.value;
+      var type = _ref3.type;
 
       if (_Configs.IS_HIDPI) {
         Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.HDPI[type]);
