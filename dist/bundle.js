@@ -2327,7 +2327,6 @@ var NightMode = function () {
       }
 
       // Moon.
-      console.log(moonSourceX);
       this.canvasCtx.drawImage(this.moonSprite, moonSourceX, this.moonSpritePos.y, moonSourceWidth, moonSourceHeight, Math.round(this.xPos), this.yPos, moonOutputWidth, NightMode.config.HEIGHT);
 
       this.canvasCtx.globalAlpha = 1;

@@ -111,7 +111,6 @@ class NightMode {
     }
 
     // Moon.
-    console.log(moonSourceX);
     this.canvasCtx.drawImage(this.moonSprite, moonSourceX,
         this.moonSpritePos.y, moonSourceWidth, moonSourceHeight,
         Math.round(this.xPos), this.yPos,
