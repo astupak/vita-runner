@@ -365,7 +365,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 function onDocumentLoad() {
-  !Object.assign && (0, _service.setAssignPolyFill)();
+  if (!Object.assign) {
+
+    (0, _service.setAssignPolyFill)();
+
+    console.log('Assign Polyfill set:' + (Object.assign != undefined));
+  }
 
   new _runner2.default('.interstitial-wrapper');
 }
