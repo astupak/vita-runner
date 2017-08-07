@@ -1,5 +1,5 @@
 import Runner from './runner';
-
+import { setAssignPolyFill } from './service';
 (function () {
   window['Runner'] = Runner;
 
@@ -7,6 +7,8 @@ import Runner from './runner';
 
 
 function onDocumentLoad() {
+  !Object.assign && setAssignPolyFill();
+  
   new Runner('.interstitial-wrapper');  
 }
 
