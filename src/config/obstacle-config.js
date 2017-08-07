@@ -56,7 +56,7 @@ export const types = [{
     height: 40,
   },
   yPos: [200, 100, 75], // Variable height.
-  yPosMobile: [100, 50], // Variable height mobile.
+  yPosMobile: [180, 80], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
   minGap: 300,
