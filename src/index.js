@@ -7,7 +7,12 @@ import { setAssignPolyFill } from './service';
 
 
 function onDocumentLoad() {
-  !Object.assign && setAssignPolyFill();
+  if (!Object.assign) {
+     
+    setAssignPolyFill();
+
+    console.log(`Assign Polyfill set:${Object.assign != undefined}`);
+  }
   
   new Runner('.interstitial-wrapper');  
 }
