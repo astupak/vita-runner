@@ -150,7 +150,6 @@ exports.vibrate = vibrate;
 exports.createCanvas = createCanvas;
 exports.decodeBase64ToArrayBuffer = decodeBase64ToArrayBuffer;
 exports.getTimeStamp = getTimeStamp;
-exports.setAssignPolyFill = setAssignPolyFill;
 
 var _Configs = __webpack_require__(0);
 
@@ -210,39 +209,6 @@ function decodeBase64ToArrayBuffer(base64String) {
 function getTimeStamp() {
   return _Configs.IS_IOS ? new Date().getTime() : performance.now();
 };
-
-function setAssignPolyFill() {
-  Object.defineProperty(Object, 'assign', {
-    enumerable: false,
-    configurable: true,
-    writable: true,
-    value: function value(target, firstSource) {
-      'use strict';
-
-      if (target === undefined || target === null) {
-        throw new TypeError('Cannot convert first argument to object');
-      }
-
-      var to = Object(target);
-      for (var i = 1; i < arguments.length; i++) {
-        var nextSource = arguments[i];
-        if (nextSource === undefined || nextSource === null) {
-          continue;
-        }
-
-        var keysArray = Object.keys(Object(nextSource));
-        for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
-          var nextKey = keysArray[nextIndex];
-          var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
-          if (desc !== undefined && desc.enumerable) {
-            to[nextKey] = nextSource[nextKey];
-          }
-        }
-      }
-      return to;
-    }
-  });
-}
 
 /***/ }),
 /* 2 */
@@ -365,15 +331,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 function onDocumentLoad() {
-  console.log('Object assign defined:' + (Object.assign != undefined));
-  if (!Object.assign) {
-
-    (0, _service.setAssignPolyFill)();
-
-    console.log('Assign Polyfill set:' + (Object.assign != undefined));
-  }
-  console.log('Object assign defined:' + (Object.assign != undefined));
-
   new _runner2.default('.interstitial-wrapper');
 }
 
