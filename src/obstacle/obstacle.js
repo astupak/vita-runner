@@ -151,13 +151,13 @@ class Obstacle {
 Obstacle = Object.assign(Obstacle, obstacleConfig);
 
 Obstacle.initSprites = () => {
-  for (let {type} of Obstacle.types) {
+  Obstacle.types.forEach(({type}) => {
     if (IS_HIDPI) {
       Obstacle[`${type}_SPRITE`] = document.getElementById(Obstacle.spriteIds.HDPI[type])
     } else {
       Obstacle[`${type}_SPRITE`] = document.getElementById(Obstacle.spriteIds.LDPI[type]);
-    }  
-  }
+    }
+  });
 };
 
 export default Obstacle;
