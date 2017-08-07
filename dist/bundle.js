@@ -1421,8 +1421,8 @@ var config = exports.config = {
   INVERT_FADE_DURATION: 10000,
   INVERT_DISTANCE: 500,
   MAX_BLINK_COUNT: 3,
-  MAX_SPEED: 13,
-  MOBILE_SPEED_COEFFICIENT: 1.2,
+  MAX_SPEED: 20,
+  MOBILE_SPEED_COEFFICIENT: 2.5,
   RESOURCE_TEMPLATE_ID: 'audio-resources',
   SPEED: 6
 };
@@ -1564,7 +1564,7 @@ var types = exports.types = [{
   collisionBoxes: {
     '1': [new _collision.CollisionBox(0, 0, 44, 92)],
     '2': [new _collision.CollisionBox(0, 0, 88, 92)],
-    '3': [new _collision.CollisionBox(0, 0, 132, 92)]
+    '3': [new _collision.CollisionBox(5, 5, 120, 78)]
   }
 }, {
   type: 'PTERODACTYL',
@@ -1575,7 +1575,7 @@ var types = exports.types = [{
     height: 40
   },
   yPos: [200, 100, 75], // Variable height.
-  yPosMobile: [100, 50], // Variable height mobile.
+  yPosMobile: [180, 80], // Variable height mobile.
   multipleSpeed: 999,
   minSpeed: 8.5,
   minGap: 300,
@@ -1614,19 +1614,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 var config = exports.config = {
   FADE_SPEED: 0.035,
-  HEIGHT: 50,
-  MOON_SPEED: 0.25,
+  HEIGHT: 60,
+  MOON_SPEED: 0.3,
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
   STAR_MAX_Y: 100,
-  WIDTH: 25
+  WIDTH: 30
 };
 
 var sourceDimensions = exports.sourceDimensions = {
   moon: {
-    WIDTH: 20,
-    HEIGHT: 40
+    WIDTH: 40,
+    HEIGHT: 80
   },
   STAR_SIZE: 9
 };
@@ -1641,7 +1641,8 @@ var spriteIds = exports.spriteIds = {
     STAR: 'star-2x'
   }
 };
-var phases = exports.phases = [140, 120, 100, 60, 40, 20, 0];
+
+var phases = exports.phases = [280, 240, 200, 120, 80, 40, 0];
 
 /***/ }),
 /* 16 */

@@ -45,7 +45,7 @@ export const types = [{
   collisionBoxes: {
     '1': [ new CollisionBox(0, 0, 44, 92) ],
     '2': [ new CollisionBox(0, 0, 88, 92) ],
-    '3': [ new CollisionBox(0, 0, 132, 92) ]
+    '3': [ new CollisionBox(5, 5, 120, 78) ]
   }
 }, {
   type: 'PTERODACTYL',

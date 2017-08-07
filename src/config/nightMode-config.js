@@ -1,18 +1,18 @@
 export const config = {
   FADE_SPEED: 0.035,
-  HEIGHT: 50,
-  MOON_SPEED: 0.25,
+  HEIGHT: 60,
+  MOON_SPEED: 0.3,
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
   STAR_MAX_Y: 100,
-  WIDTH: 25
+  WIDTH: 30
 };
 
 export const sourceDimensions = {
   moon: {
-    WIDTH: 20,
-    HEIGHT: 40,
+    WIDTH: 40,
+    HEIGHT: 80,
   },
   STAR_SIZE: 9,
 };
@@ -28,4 +28,5 @@ export const spriteIds = {
       STAR: 'star-2x'
   }
 };
-export const phases = [140, 120, 100, 60, 40, 20, 0];
+
+export const phases = [280, 240, 200, 120, 80, 40, 0];
