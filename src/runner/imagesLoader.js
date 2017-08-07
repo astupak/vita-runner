@@ -21,14 +21,14 @@ class ImagesLoader {
   }
 
   addEventListeners () {
-    for (let img of this.images) {
-      img.addEventListener(runnerConfig.events.LOAD,() => {
+    this.images.forEach((img) => {
+       img.addEventListener(runnerConfig.events.LOAD,() => {
         if (this.checkAll() && !this.callbackCalled) {
           this.callbackCalled = true;
           this.loadedCallback();
         }
       });
-    }
+    });
   }
 
   onLoaded(callback) {

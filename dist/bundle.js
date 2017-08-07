@@ -3492,35 +3492,14 @@ var ImagesLoader = function () {
     value: function addEventListeners() {
       var _this = this;
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = this.images[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var img = _step.value;
-
-          img.addEventListener(_Configs.runnerConfig.events.LOAD, function () {
-            if (_this.checkAll() && !_this.callbackCalled) {
-              _this.callbackCalled = true;
-              _this.loadedCallback();
-            }
-          });
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
+      this.images.forEach(function (img) {
+        img.addEventListener(_Configs.runnerConfig.events.LOAD, function () {
+          if (_this.checkAll() && !_this.callbackCalled) {
+            _this.callbackCalled = true;
+            _this.loadedCallback();
           }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
+        });
+      });
     }
   }, {
     key: 'onLoaded',
