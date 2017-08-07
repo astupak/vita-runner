@@ -2665,35 +2665,15 @@ var Obstacle = function () {
 Obstacle = Object.assign(Obstacle, _Configs.obstacleConfig);
 
 Obstacle.initSprites = function () {
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  Obstacle.types.forEach(function (_ref2) {
+    var type = _ref2.type;
 
-  try {
-    for (var _iterator = Obstacle.types[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _ref3 = _step.value;
-      var type = _ref3.type;
-
-      if (_Configs.IS_HIDPI) {
-        Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.HDPI[type]);
-      } else {
-        Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.LDPI[type]);
-      }
+    if (_Configs.IS_HIDPI) {
+      Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.HDPI[type]);
+    } else {
+      Obstacle[type + '_SPRITE'] = document.getElementById(Obstacle.spriteIds.LDPI[type]);
     }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
+  });
 };
 
 exports.default = Obstacle;
