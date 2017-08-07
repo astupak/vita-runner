@@ -1,13 +1,22 @@
 export const config = {
   FADE_SPEED: 0.035,
-  HEIGHT: 40,
+  HEIGHT: 50,
   MOON_SPEED: 0.25,
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
   STAR_MAX_Y: 100,
-  WIDTH: 20
+  WIDTH: 25
 };
+
+export const sourceDimensions = {
+  moon: {
+    WIDTH: 20,
+    HEIGHT: 40,
+  },
+  STAR_SIZE: 9,
+};
+
 
 export const spriteIds = {
   LDPI: {

@@ -768,11 +768,11 @@ var Runner = function () {
           this.horizon.update(0, this.currentSpeed, hasObstacles);
         } else {
           deltaTime = !this.activated ? 0 : deltaTime;
-          this.horizon.update(deltaTime, this.currentSpeed, hasObstacles, this.inverted || true);
+          this.horizon.update(deltaTime, this.currentSpeed, hasObstacles, this.inverted);
         }
 
         // Check for collisions.
-        var collision = hasObstacles && (0, _collision.checkForCollision)(this.horizon.obstacles[0], this.tRex, this.canvasCtx);
+        var collision = hasObstacles && (0, _collision.checkForCollision)(this.horizon.obstacles[0], this.tRex);
 
         if (!collision) {
           this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
@@ -1418,8 +1418,8 @@ var config = exports.config = {
   ACCELERATION: 0.001,
   CLEAR_TIME: 3000,
   GAMEOVER_CLEAR_TIME: 750,
-  INVERT_FADE_DURATION: 12000,
-  INVERT_DISTANCE: 700,
+  INVERT_FADE_DURATION: 10000,
+  INVERT_DISTANCE: 500,
   MAX_BLINK_COUNT: 3,
   MAX_SPEED: 13,
   MOBILE_SPEED_COEFFICIENT: 1.2,
@@ -1537,8 +1537,8 @@ var types = exports.types = [{
   width: 42,
   height: 80,
   sourceDimensions: {
-    width: 17,
-    height: 35
+    width: 34,
+    height: 70
   },
   yPos: 178,
   multipleSpeed: 4,
@@ -1554,10 +1554,10 @@ var types = exports.types = [{
   width: 44,
   height: 92,
   sourceDimensions: {
-    width: 25,
-    height: 50
+    width: 50,
+    height: 100
   },
-  yPos: 162,
+  yPos: 168,
   multipleSpeed: 7,
   minGap: 240,
   minSpeed: 0,
@@ -1614,13 +1614,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 var config = exports.config = {
   FADE_SPEED: 0.035,
-  HEIGHT: 40,
+  HEIGHT: 50,
   MOON_SPEED: 0.25,
   NUM_STARS: 2,
   STAR_SIZE: 9,
   STAR_SPEED: 0.3,
   STAR_MAX_Y: 100,
-  WIDTH: 20
+  WIDTH: 25
+};
+
+var sourceDimensions = exports.sourceDimensions = {
+  moon: {
+    WIDTH: 20,
+    HEIGHT: 40
+  },
+  STAR_SIZE: 9
 };
 
 var spriteIds = exports.spriteIds = {
@@ -2293,18 +2301,18 @@ var NightMode = function () {
   }, {
     key: 'draw',
     value: function draw() {
-      var moonSourceWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 : NightMode.config.WIDTH;
-      var moonSourceHeight = NightMode.config.HEIGHT;
+      var moonSourceWidth = this.currentPhase == 3 ? NightMode.sourceDimensions.moon.WIDTH * 2 : NightMode.sourceDimensions.moon.WIDTH;
+      var moonSourceHeight = NightMode.sourceDimensions.moon.HEIGHT;
       var moonSourceX = this.moonSpritePos.x + NightMode.phases[this.currentPhase];
-      var moonOutputWidth = moonSourceWidth;
-      var starSize = NightMode.config.STAR_SIZE;
+      var moonOutputWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 : NightMode.config.WIDTH;
+      var sourceStarSize = NightMode.sourceDimensions.STAR_SIZE;
       var starSourceX = this.starSpritePos.x;
 
       if (_Configs.IS_HIDPI) {
         moonSourceWidth *= 2;
         moonSourceHeight *= 2;
         moonSourceX = this.moonSpritePos.x + NightMode.phases[this.currentPhase] * 2;
-        starSize *= 2;
+        sourceStarSize *= 2;
         starSourceX = this.starSpritePos.x;
       }
 
@@ -2314,11 +2322,12 @@ var NightMode = function () {
       // Stars.
       if (this.drawStars) {
         for (var i = 0; i < NightMode.config.NUM_STARS; i++) {
-          this.canvasCtx.drawImage(this.starSprite, starSourceX, this.stars[i].sourceY, starSize, starSize, Math.round(this.stars[i].x), this.stars[i].y, NightMode.config.STAR_SIZE, NightMode.config.STAR_SIZE);
+          this.canvasCtx.drawImage(this.starSprite, starSourceX, this.stars[i].sourceY, sourceStarSize, sourceStarSize, Math.round(this.stars[i].x), this.stars[i].y, NightMode.config.STAR_SIZE, NightMode.config.STAR_SIZE);
         }
       }
 
       // Moon.
+      console.log(moonSourceX);
       this.canvasCtx.drawImage(this.moonSprite, moonSourceX, this.moonSpritePos.y, moonSourceWidth, moonSourceHeight, Math.round(this.xPos), this.yPos, moonOutputWidth, NightMode.config.HEIGHT);
 
       this.canvasCtx.globalAlpha = 1;

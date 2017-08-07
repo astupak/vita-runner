@@ -79,12 +79,13 @@ class NightMode {
   }
 
   draw() {
-    let moonSourceWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 :
-        NightMode.config.WIDTH;
-    let moonSourceHeight = NightMode.config.HEIGHT;
+    let moonSourceWidth = this.currentPhase == 3 ? NightMode.sourceDimensions.moon.WIDTH * 2 :
+        NightMode.sourceDimensions.moon.WIDTH;
+    let moonSourceHeight = NightMode.sourceDimensions.moon.HEIGHT;
     let moonSourceX = this.moonSpritePos.x + NightMode.phases[this.currentPhase];
-    let moonOutputWidth = moonSourceWidth;
-    let starSize = NightMode.config.STAR_SIZE;
+    let moonOutputWidth = this.currentPhase == 3 ? NightMode.config.WIDTH * 2 :
+        NightMode.config.WIDTH;
+    let sourceStarSize = NightMode.sourceDimensions.STAR_SIZE;
     let starSourceX = this.starSpritePos.x;
 
     if (IS_HIDPI) {
@@ -92,7 +93,7 @@ class NightMode {
         moonSourceHeight *= 2;
         moonSourceX = this.moonSpritePos.x +
             (NightMode.phases[this.currentPhase] * 2);
-        starSize *= 2;
+        sourceStarSize *= 2;
         starSourceX = this.starSpritePos.x;
     }
 
@@ -103,13 +104,14 @@ class NightMode {
     if (this.drawStars) {
         for (let i = 0; i < NightMode.config.NUM_STARS; i++) {
             this.canvasCtx.drawImage(this.starSprite,
-                starSourceX, this.stars[i].sourceY, starSize, starSize,
+                starSourceX, this.stars[i].sourceY, sourceStarSize, sourceStarSize,
                 Math.round(this.stars[i].x), this.stars[i].y,
                 NightMode.config.STAR_SIZE, NightMode.config.STAR_SIZE);
         }
     }
 
     // Moon.
+    console.log(moonSourceX);
     this.canvasCtx.drawImage(this.moonSprite, moonSourceX,
         this.moonSpritePos.y, moonSourceWidth, moonSourceHeight,
         Math.round(this.xPos), this.yPos,

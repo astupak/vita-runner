@@ -367,12 +367,12 @@ class Runner {
       } else {
         deltaTime = !this.activated ? 0 : deltaTime;
         this.horizon.update(deltaTime, this.currentSpeed, hasObstacles,
-          this.inverted || true);
+          this.inverted);
       }
 
       // Check for collisions.
       let collision = hasObstacles &&
-        checkForCollision(this.horizon.obstacles[0], this.tRex, this.canvasCtx);
+        checkForCollision(this.horizon.obstacles[0], this.tRex);
 
       if (!collision) {
         this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
